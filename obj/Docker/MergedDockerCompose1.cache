@@ -1,0 +1,47 @@
+name: dockercompose18257875230642115938
+services:
+  ambev.developerevaluation.cache:
+    command:
+      - redis-server
+      - --requirepass
+      - ev@luAt10n
+    container_name: ambev_developer_evaluation_cache
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: ev@luAt10n
+      MONGO_INITDB_ROOT_USERNAME: developer
+    image: redis:7.4.1-alpine
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 6379
+        protocol: tcp
+  ambev.developerevaluation.database:
+    container_name: ambev_developer_evaluation_database
+    environment:
+      POSTGRES_DB: developer_evaluation
+      POSTGRES_PASSWORD: ev@luAt10n
+      POSTGRES_USER: developer
+    image: postgres:13
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5432
+        protocol: tcp
+    restart: unless-stopped
+  ambev.developerevaluation.nosql:
+    container_name: ambev_developer_evaluation_nosql
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: ev@luAt10n
+      MONGO_INITDB_ROOT_USERNAME: developer
+    image: mongo:8.0
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 27017
+        protocol: tcp
+networks:
+  default:
+    name: dockercompose18257875230642115938_default
