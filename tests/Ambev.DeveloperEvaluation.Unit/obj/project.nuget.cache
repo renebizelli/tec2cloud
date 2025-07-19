@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yPZz6qA/YZw=",
+  "dgSpecHash": "DrOWyg3HfHo=",
   "success": true,
   "projectFilePath": "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\tests\\Ambev.DeveloperEvaluation.Unit\\Ambev.DeveloperEvaluation.Unit.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "C:\\Users\\René\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.10\\microsoft.entityframeworkcore.abstractions.8.0.10.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.10\\microsoft.entityframeworkcore.analyzers.8.0.10.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.10\\microsoft.entityframeworkcore.relational.8.0.10.nupkg.sha512",
+    "C:\\Users\\René\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.10\\microsoft.entityframeworkcore.tools.8.0.10.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.1\\microsoft.extensions.caching.memory.8.0.1.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
