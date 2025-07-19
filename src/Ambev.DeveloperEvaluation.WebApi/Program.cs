@@ -8,6 +8,7 @@ using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.WebApi.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
 namespace Ambev.DeveloperEvaluation.WebApi;
@@ -74,6 +75,7 @@ public class Program
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex.Message);
             Log.Fatal(ex, "Application terminated unexpectedly");
         }
         finally
