@@ -17,6 +17,7 @@ public class SaleConfiguration : IEntityTypeConfiguration<Sale>
         builder.Property(u => u.Status).IsRequired();
         builder.Property(u => u.TotalAmount).IsRequired();
         builder.Property(u => u.CreatedAt).IsRequired();
+        builder.Property(u => u.Status).IsRequired();
 
         builder.HasMany(m => m.Items)
             .WithOne(o => o.Sale)

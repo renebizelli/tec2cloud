@@ -1,6 +1,6 @@
-﻿using Ambev.DeveloperEvaluation.Application.Carts.CreateOrUpdateCart;
+﻿using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Common;
-using Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateOrUpdateCart;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +10,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales;
 
 [Authorize]
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/branch/{branch}/[controller]")]
 public class SalesController : BaseController
 {
     private readonly IMediator _mediator;
@@ -24,21 +24,21 @@ public class SalesController : BaseController
     [HttpPost]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateSale([FromBody] CreateOrUpdateCartRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateSale([FromRoute] Guid branch, CancellationToken cancellationToken)
     {
-        var validator = new CreateOrUpdateCartRequestValidator();
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        var request = new CreateSaleRequest
+        {
+            UserId = GetCurrentUserId(),
+            BranchId = branch
+        };
 
-        if (!validationResult.IsValid)
-            return BadRequest(validationResult.Errors);
+        var command = _mapper.Map<CreateSaleCommand>(request);
 
-        var command = _mapper.Map<CreateOrUpdateCartCommand>(request);
+        var result = await _mediator.Send(command, cancellationToken);
 
-        command.UserId = GetCurrentUserId();
+        var response = _mapper.Map<CreateSaleResponse>(result);
 
-        await _mediator.Send(command, cancellationToken);
-
-        return Created();
+        return Ok(response);
     }
 
 }

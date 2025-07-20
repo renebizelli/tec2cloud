@@ -1,18 +1,11 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.NoSQL;
-using Ambev.DeveloperEvaluation.NoSQL.Mapping;
 using Ambev.DeveloperEvaluation.NoSQL.Repositories;
 using Ambev.DeveloperEvaluation.ORM;
 using Ambev.DeveloperEvaluation.ORM.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Bson.Serialization.Serializers;
-using MongoDB.Driver;
 
 namespace Ambev.DeveloperEvaluation.IoC.ModuleInitializers;
 
@@ -24,14 +17,15 @@ public class InfrastructureModuleInitializer : IModuleInitializer
 
         new MongoDbInitialize().Initialize(builder);
 
-        builder.Services.AddScoped<IUserRepository, UserRepository>();
-        builder.Services.AddScoped<IProductRepository, ProductRepository>();
-        builder.Services.AddScoped<ICartRepository, CartRepository>();
+        builder.Services.AddTransient<IUserRepository, UserRepository>();
+        builder.Services.AddTransient<IProductRepository, ProductRepository>();
+        builder.Services.AddTransient<ICartRepository, CartRepository>();
+        builder.Services.AddTransient<ISaleRepository, SaleRepository>();
     }
 
     private void ORMInitialize(WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<DbContext>(provider => provider.GetRequiredService<DefaultContext>());
+        builder.Services.AddTransient<DbContext>(provider => provider.GetRequiredService<DefaultContext>());
     }
 
 

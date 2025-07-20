@@ -1,4 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Common;
+using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 using MediatR;
 
@@ -23,9 +24,11 @@ public class GetCartByUserHandle : IRequestHandler<GetCartByUserCommand, GetCart
         _mapper = mapper;
     }
 
-    public async Task<GetCartByUserResult> Handle(GetCartByUserCommand request, CancellationToken cancellationToken)
+    public async Task<GetCartByUserResult> Handle(GetCartByUserCommand command, CancellationToken cancellationToken)
     {
-        var cart = await _repository.GetCartByUser(request.UserId, cancellationToken);
+        var filter = _mapper.Map<CartFilter>(command);
+
+        var cart = await _repository.GetCartByUser(filter, cancellationToken);
 
         if (cart == null) return new();
 

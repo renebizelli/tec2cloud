@@ -3,5 +3,5 @@
 public enum SaleStatus : byte
 {
     Cancelled = 0,
-    NotCancelled 
+    Active
 }

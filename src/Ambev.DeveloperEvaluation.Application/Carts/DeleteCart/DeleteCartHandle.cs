@@ -1,4 +1,6 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Common;
+using Ambev.DeveloperEvaluation.Domain.Repositories;
+using AutoMapper;
 using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Carts.DeleteCart;
@@ -6,14 +8,20 @@ namespace Ambev.DeveloperEvaluation.Application.Carts.DeleteCart;
 internal class DeleteCartHandle : IRequestHandler<DeleteCartCommand>
 {
     private readonly ICartRepository _repository;
+    private readonly IMapper _mapper;
 
-    public DeleteCartHandle(ICartRepository cartRepository)
+    public DeleteCartHandle(
+        ICartRepository cartRepository,
+        IMapper mapper)
     {
         _repository = cartRepository;
+        _mapper = mapper;
     }
 
-    public async Task Handle(DeleteCartCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteCartCommand command, CancellationToken cancellationToken)
     {
-        await _repository.DeleteCart(request.UserId, cancellationToken);
+        var filter = _mapper.Map<CartFilter>(command);
+
+        await _repository.DeleteCart(filter, cancellationToken);
     }
 }

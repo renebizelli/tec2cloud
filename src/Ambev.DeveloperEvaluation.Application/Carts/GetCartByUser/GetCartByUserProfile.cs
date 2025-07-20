@@ -1,4 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+﻿using Ambev.DeveloperEvaluation.Domain.Common;
+using Ambev.DeveloperEvaluation.Domain.Entities;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.Application.Carts.GetCartByUser;
@@ -9,5 +10,6 @@ public class GetCartByUserProfile : Profile
     {
         CreateMap<Cart, GetCartByUserResult>();
         CreateMap<CartItem, GetCartByUserResult.CartItem>();
+        CreateMap<GetCartByUserCommand, CartFilter>();
     }
 }

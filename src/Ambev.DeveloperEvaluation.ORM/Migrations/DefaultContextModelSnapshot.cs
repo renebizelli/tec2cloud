@@ -113,6 +113,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                     b.Property<int>("SaleId")
                         .HasColumnType("integer");
 
+                    b.Property<byte>("Status")
+                        .HasColumnType("smallint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
