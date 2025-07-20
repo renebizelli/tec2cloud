@@ -11,10 +11,14 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <PackageReference Include="MongoDB.Driver" Version="3.4.1" />
 	  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
+	  <PackageReference Include="Rebus.ServiceProvider" Version="10.3.0" />
 	</ItemGroup>
 	
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Ambev.DeveloperEvaluation.NoSQL\Ambev.DeveloperEvaluation.NoSQL.csproj" />
+		<ProjectReference Include="..\..\..\Ambev.DeveloperEvaluation.Processors\Ambev.DeveloperEvaluation.Processors.csproj" />
 		<ProjectReference Include="..\Ambev.DeveloperEvaluation.Domain\Ambev.DeveloperEvaluation.Domain.csproj" />
 		<ProjectReference Include="..\Ambev.DeveloperEvaluation.Application\Ambev.DeveloperEvaluation.Application.csproj" />
 		<ProjectReference Include="..\Ambev.DeveloperEvaluation.ORM\Ambev.DeveloperEvaluation.ORM.csproj" />

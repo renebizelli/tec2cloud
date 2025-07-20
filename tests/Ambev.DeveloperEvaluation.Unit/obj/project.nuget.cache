@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yPZz6qA/YZw=",
+  "dgSpecHash": "6SxCW0XaKJk=",
   "success": true,
   "projectFilePath": "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\tests\\Ambev.DeveloperEvaluation.Unit\\Ambev.DeveloperEvaluation.Unit.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "C:\\Users\\René\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.10\\microsoft.entityframeworkcore.abstractions.8.0.10.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.10\\microsoft.entityframeworkcore.analyzers.8.0.10.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.10\\microsoft.entityframeworkcore.relational.8.0.10.nupkg.sha512",
+    "C:\\Users\\René\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.10\\microsoft.entityframeworkcore.tools.8.0.10.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.1\\microsoft.extensions.caching.memory.8.0.1.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
@@ -56,6 +57,7 @@
     "C:\\Users\\René\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.8\\npgsql.entityframeworkcore.postgresql.8.0.8.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\nsubstitute\\5.1.0\\nsubstitute.5.1.0.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\oneof\\3.0.271\\oneof.3.0.271.nupkg.sha512",
+    "C:\\Users\\René\\.nuget\\packages\\rebus\\8.8.0\\rebus.8.8.0.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\roslynator.analyzers\\4.12.4\\roslynator.analyzers.4.12.4.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\roslynator.core\\4.12.4\\roslynator.core.4.12.4.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\roslynator.testing.common\\4.12.4\\roslynator.testing.common.4.12.4.nupkg.sha512",

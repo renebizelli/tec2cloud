@@ -65,6 +65,10 @@
             "OneOf": {
               "target": "Package",
               "version": "[3.0.271, )"
+            },
+            "Rebus": {
+              "target": "Package",
+              "version": "[8.8.0, )"
             }
           },
           "imports": [
