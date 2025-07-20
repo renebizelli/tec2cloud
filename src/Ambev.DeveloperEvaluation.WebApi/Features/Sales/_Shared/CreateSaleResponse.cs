@@ -1,7 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Enums;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
-public class CreateSaleResponse
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales._Shared;
+public class SaleResponse
 {
 public int Id { get; set; }
 public Guid BranchId { get; set; }

@@ -1,4 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Common;
+﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared;
+using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Events;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
@@ -10,7 +11,7 @@ using Rebus.Bus;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
-public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, CreateSaleResult>
+public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, SaleResult>
 {
     private readonly ISaleRepository _saleRepository;
     private readonly ICartRepository _cartRepository;
@@ -32,7 +33,7 @@ public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, CreateSaleRes
         _mapper = mapper;
     }
 
-    public async Task<CreateSaleResult> Handle(CreateSaleCommand command, CancellationToken cancellationToken)
+    public async Task<SaleResult> Handle(CreateSaleCommand command, CancellationToken cancellationToken)
     {
         var filter = _mapper.Map<CartFilter>(command);
 
@@ -50,9 +51,9 @@ public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, CreateSaleRes
 
         await _bus.Send(new SaleCreatedEvent { SaleId = sale.Id });
 
-        sale = await _saleRepository.Get(sale.Id, filter.UserId, cancellationToken);
+        sale = await _saleRepository.Get(sale.Id, cancellationToken);
 
-        var result = _mapper.Map<CreateSaleResult>(sale);
+        var result = _mapper.Map<SaleResult>(sale);
 
         return result;
     }

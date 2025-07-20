@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,14 +14,14 @@ public class SaleRepository : ISaleRepository
         _context = context;
     }
 
-    public async Task<Sale?> Get(int saleId, Guid userId, CancellationToken cancellationToken = default)
+    public async Task<Sale?> Get(int saleId, CancellationToken cancellationToken = default)
     {
         return await _context.Sales
-            .Include(i=> i.Items).ThenInclude(i=> i.Product)
+            .Include(i=> i.Items.Where(w => w.Status == SaleItemStatus.Active))
+                .ThenInclude(i=> i.Product)
             .Include(i => i.User)
             .AsNoTracking()
             .Where(w => w.Id.Equals(saleId))
-            .Where(w => w.UserId.Equals(userId))
             .FirstOrDefaultAsync(cancellationToken);
     }
 

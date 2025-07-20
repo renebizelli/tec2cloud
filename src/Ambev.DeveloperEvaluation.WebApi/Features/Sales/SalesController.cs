@@ -1,6 +1,9 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
+using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 using Ambev.DeveloperEvaluation.WebApi.Common;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales._Shared;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +13,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales;
 
 [Authorize]
 [ApiController]
-[Route("api/branch/{branch}/[controller]")]
+[Route("api")]
 public class SalesController : BaseController
 {
     private readonly IMediator _mediator;
@@ -22,6 +25,7 @@ public class SalesController : BaseController
     }
 
     [HttpPost]
+    [Route("branch/{branch}/[controller]")]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateSale([FromRoute] Guid branch, CancellationToken cancellationToken)
@@ -36,7 +40,27 @@ public class SalesController : BaseController
 
         var result = await _mediator.Send(command, cancellationToken);
 
-        var response = _mapper.Map<CreateSaleResponse>(result);
+        var response = _mapper.Map<SaleResponse>(result);
+
+        return Ok(response);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("[controller]/{id}")]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> CreateSale([FromRoute] Guid branch, [FromRoute] int id, CancellationToken cancellationToken)
+    {
+        var request = new GetSaleRequest
+        {
+            SaleId = id
+        };
+
+        var command = _mapper.Map<GetSaleCommand>(request);
+
+        var result = await _mediator.Send(command, cancellationToken);
+
+        var response = _mapper.Map<SaleResponse>(result);
 
         return Ok(response);
     }

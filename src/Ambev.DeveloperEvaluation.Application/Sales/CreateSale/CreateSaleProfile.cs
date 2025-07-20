@@ -1,6 +1,6 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared;
+using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
@@ -26,7 +26,7 @@ public class CreateSaleProfile : Profile
             .ForMember(f => f.Discount, a => a.Ignore())
             .ForMember(f => f.Status, a => a.MapFrom(m => SaleItemStatus.Active));
 
-        CreateMap<Sale, CreateSaleResult>();
+        CreateMap<Sale, SaleResult>();
         CreateMap<SaleItem,  SaleItemResult>();
 
         CreateMap<User, UserResult>()

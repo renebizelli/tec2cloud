@@ -1,17 +1,17 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared;
-using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
+using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales._Shared;
 using AutoMapper;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
 
-public class CreateSaleProfile : Profile
+public class GetSaleProfile : Profile
 {
-    public CreateSaleProfile()
+    public GetSaleProfile()
     {
-        CreateMap<CreateSaleRequest, CreateSaleCommand>();
-        CreateMap<CreateSaleCommand, CartFilter>();
+        CreateMap<GetSaleRequest, GetSaleCommand>();
+        CreateMap<GetSaleCommand, CartFilter>();
 
         CreateMap<SaleResult, SaleResponse>();
         CreateMap<SaleItemResult, SaleItemResponse>();
