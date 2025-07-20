@@ -1,7 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 using MediatR;
-using Ambev.DeveloperEvaluation.Domain.Entities;
 
 namespace Ambev.DeveloperEvaluation.Application.Carts.GetCartByUser;
 
@@ -26,21 +25,12 @@ public class GetCartByUserHandle : IRequestHandler<GetCartByUserCommand, GetCart
 
     public async Task<GetCartByUserResult> Handle(GetCartByUserCommand request, CancellationToken cancellationToken)
     {
-        var cart = new Cart
-        {
-            UserId = Guid.Parse("ad4edb9d-73ef-43ff-9344-3c142958740c"),
-            UpdatedAt = DateTime.Today,
-            Items = new List<CartItem>()
-            {
-                new CartItem { ProductId = 1, Quantity = 3 },
-            }
-        };
+        var cart = await _repository.GetCartByUser(request.UserId, cancellationToken);
 
-        await _repository.CreateOrUpdateCart(cart, cancellationToken);
+        if (cart == null) return new();
 
+        var result = _mapper.Map<GetCartByUserResult>(cart);
 
-        var s = await _repository.GetCartByUser(request.UserId, cancellationToken);
-
-        return new GetCartByUserResult();
+        return result;
     }
 }
