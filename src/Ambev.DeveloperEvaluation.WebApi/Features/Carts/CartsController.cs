@@ -14,7 +14,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Carts;
 
 [Authorize]
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/branch/{branch}/[controller]")]
 public class CartsController : BaseController
 {
     private readonly IMediator _mediator;
@@ -31,10 +31,10 @@ public class CartsController : BaseController
         _mapper = mapper;
     }
 
-    [HttpPost]
+    [HttpPost()]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateUser([FromBody] CreateOrUpdateCartRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateUser([FromRoute] Guid branch, [FromBody] CreateOrUpdateCartRequest request, CancellationToken cancellationToken)
     {
         var validator = new CreateOrUpdateCartRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
@@ -45,6 +45,7 @@ public class CartsController : BaseController
         var command = _mapper.Map<CreateOrUpdateCartCommand>(request);
 
         command.UserId = GetCurrentUserId();
+        command.BranchId = branch;
 
         await _mediator.Send(command, cancellationToken);
 
@@ -53,11 +54,12 @@ public class CartsController : BaseController
 
     [HttpGet()]
     [ProducesResponseType(typeof(ApiResponseWithData<GetCartByUserResponse>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetCart(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetCart([FromRoute] Guid branch, CancellationToken cancellationToken)
     {
         var command = new GetCartByUserCommand()
         {
-            UserId = GetCurrentUserId()    
+            UserId = GetCurrentUserId(),
+            BranchId = branch
         };
 
         var response = await _mediator.Send(command, cancellationToken);
@@ -69,11 +71,13 @@ public class CartsController : BaseController
 
     [HttpDelete()]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> DeleteCart(CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteCart([FromRoute] Guid branch, CancellationToken cancellationToken)
     {
         var request = new DeleteCartRequest { UserId = GetCurrentUserId() };
 
         var command = _mapper.Map<DeleteCartCommand>(request);
+
+        command.BranchId = branch;
 
         await _mediator.Send(command, cancellationToken);
 

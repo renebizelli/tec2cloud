@@ -4,6 +4,7 @@ public class Cart
 {
     public string? Id { get; set; }
     public Guid UserId { get; set; }
+    public Guid BranchId { get; set; }
     public DateTime UpdatedAt { get; set; }
 
     public ICollection<CartItem> Items { get; set; } = [];
