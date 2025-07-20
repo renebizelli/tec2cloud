@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+wEcPg6kjO8=",
+  "dgSpecHash": "xFR6TtQ+PRE=",
   "success": true,
   "projectFilePath": "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\src\\Ambev.DeveloperEvaluation.WebApi\\Ambev.DeveloperEvaluation.WebApi.csproj",
   "expectedPackageFiles": [
@@ -58,9 +58,12 @@
     "C:\\Users\\René\\.nuget\\packages\\mongodb.driver.core\\2.30.0\\mongodb.driver.core.2.30.0.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\mongodb.libmongocrypt\\1.12.0\\mongodb.libmongocrypt.1.12.0.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\René\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\npgsql\\8.0.4\\npgsql.8.0.4.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.8\\npgsql.entityframeworkcore.postgresql.8.0.8.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\oneof\\3.0.271\\oneof.3.0.271.nupkg.sha512",
+    "C:\\Users\\René\\.nuget\\packages\\rebus\\8.8.0\\rebus.8.8.0.nupkg.sha512",
+    "C:\\Users\\René\\.nuget\\packages\\rebus.serviceprovider\\10.3.0\\rebus.serviceprovider.10.3.0.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\serilog\\4.0.0\\serilog.4.0.0.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\serilog.aspnetcore\\8.0.3\\serilog.aspnetcore.8.0.3.nupkg.sha512",
     "C:\\Users\\René\\.nuget\\packages\\serilog.enrichers.environment\\3.0.1\\serilog.enrichers.environment.3.0.1.nupkg.sha512",

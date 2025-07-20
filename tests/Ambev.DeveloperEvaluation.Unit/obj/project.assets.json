@@ -1233,6 +1233,22 @@
           "lib/netstandard2.0/OneOf.dll": {}
         }
       },
+      "Rebus/8.8.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "[13.0.1, 14.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/Rebus.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Rebus.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Roslynator.Analyzers/4.12.4": {
         "type": "package"
       },
@@ -1918,7 +1934,8 @@
           "Ambev.DeveloperEvaluation.Domain": "1.0.0",
           "AutoMapper": "13.0.1",
           "MediatR": "12.4.1",
-          "OneOf": "3.0.271"
+          "OneOf": "3.0.271",
+          "Rebus": "8.8.0"
         },
         "compile": {
           "bin/placeholder/Ambev.DeveloperEvaluation.Application.dll": {}
@@ -4264,6 +4281,34 @@
         "lib/netstandard2.0/OneOf.dll",
         "oneof.3.0.271.nupkg.sha512",
         "oneof.nuspec"
+      ]
+    },
+    "Rebus/8.8.0": {
+      "sha512": "bfnybaR2o1cJMoFKpVl4nPP+3H/Y51fTheNJgIzHXXUb24zjd8x7gDDozs1XpYMfpc9q56tKjV2umbWz9GdM9A==",
+      "type": "package",
+      "path": "rebus/8.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net6.0/Rebus.dll",
+        "lib/net6.0/Rebus.pdb",
+        "lib/net6.0/Rebus.xml",
+        "lib/net7.0/Rebus.dll",
+        "lib/net7.0/Rebus.pdb",
+        "lib/net7.0/Rebus.xml",
+        "lib/net8.0/Rebus.dll",
+        "lib/net8.0/Rebus.pdb",
+        "lib/net8.0/Rebus.xml",
+        "lib/net9.0/Rebus.dll",
+        "lib/net9.0/Rebus.pdb",
+        "lib/net9.0/Rebus.xml",
+        "lib/netstandard2.0/Rebus.dll",
+        "lib/netstandard2.0/Rebus.pdb",
+        "lib/netstandard2.0/Rebus.xml",
+        "little_rebusbus2_copy-500x500.png",
+        "rebus.8.8.0.nupkg.sha512",
+        "rebus.nuspec"
       ]
     },
     "Roslynator.Analyzers/4.12.4": {

@@ -136,7 +136,6 @@ E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\back
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\obj\Debug\net8.0\Ambev.DeveloperEvaluation.WebApi.AssemblyInfoInputs.cache
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\obj\Debug\net8.0\Ambev.DeveloperEvaluation.WebApi.AssemblyInfo.cs
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\obj\Debug\net8.0\Ambev.DeveloperEvaluation.WebApi.csproj.CoreCompileInputs.cache
-E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\obj\Debug\net8.0\Ambev.DeveloperEvaluation.WebApi.MvcApplicationPartsAssemblyInfo.cs
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\obj\Debug\net8.0\Ambev.DeveloperEvaluation.WebApi.MvcApplicationPartsAssemblyInfo.cache
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\obj\Debug\net8.0\Ambev.DeveloperEvaluation.WebApi.sourcelink.json
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\obj\Debug\net8.0\rjimswa.dswa.cache.json
@@ -169,3 +168,9 @@ E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\back
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\bin\Debug\net8.0\runtimes\win\native\mongocrypt.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\bin\Debug\net8.0\Ambev.DeveloperEvaluation.NoSQL.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\bin\Debug\net8.0\Ambev.DeveloperEvaluation.NoSQL.pdb
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\bin\Debug\net8.0\Newtonsoft.Json.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\bin\Debug\net8.0\Rebus.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\bin\Debug\net8.0\Rebus.ServiceProvider.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Processors.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Processors.pdb
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.WebApi\obj\Debug\net8.0\Ambev.DeveloperEvaluation.WebApi.MvcApplicationPartsAssemblyInfo.cs

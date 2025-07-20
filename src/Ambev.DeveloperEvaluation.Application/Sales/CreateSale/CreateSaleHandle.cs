@@ -1,12 +1,12 @@
-﻿using Ambev.DeveloperEvaluation.Common.Security;
-using Ambev.DeveloperEvaluation.Domain.Common;
+﻿using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Events;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Services;
-using Ambev.DeveloperEvaluation.Domain.Services.Discount;
 using Ambev.DeveloperEvaluation.Domain.Specifications;
 using AutoMapper;
 using MediatR;
+using Rebus.Bus;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
@@ -15,17 +15,20 @@ public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, CreateSaleRes
     private readonly ISaleRepository _saleRepository;
     private readonly ICartRepository _cartRepository;
     private readonly ISalePricing _salePricing;
+    private readonly IBus _bus;
     private readonly IMapper _mapper;
 
     public CreateSaleHandle(
         ISaleRepository saleRepository,
         ICartRepository cartRepository,
         ISalePricing salePricing,
+        Rebus.Bus.IBus bus,
         IMapper mapper)
     {
         _saleRepository = saleRepository;
         _cartRepository = cartRepository;
         _salePricing = salePricing;
+        _bus = bus;
         _mapper = mapper;
     }
 
@@ -44,6 +47,8 @@ public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, CreateSaleRes
         await _saleRepository.CreateSale(sale, cancellationToken);
 
         await _cartRepository.DeleteCart(filter, cancellationToken);
+
+        await _bus.Send(new SaleCreatedEvent { SaleId = sale.Id });
 
         sale = await _saleRepository.Get(sale.Id, filter.UserId, cancellationToken);
 
