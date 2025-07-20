@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared;
+﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared.Results;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 using MediatR;

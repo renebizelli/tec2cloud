@@ -154,3 +154,4 @@ E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\back
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Integration\obj\Debug\net8.0\Ambev.DeveloperEvaluation.Integration.pdb
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Integration\obj\Debug\net8.0\Ambev.DeveloperEvaluation.Integration.genruntimeconfig.cache
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Integration\obj\Debug\net8.0\ref\Ambev.DeveloperEvaluation.Integration.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Integration\bin\Debug\net8.0\Rebus.dll

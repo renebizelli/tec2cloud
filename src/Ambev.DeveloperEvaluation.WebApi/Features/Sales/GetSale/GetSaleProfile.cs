@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared;
+﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared.Results;
 using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales._Shared;
@@ -12,11 +12,5 @@ public class GetSaleProfile : Profile
     {
         CreateMap<GetSaleRequest, GetSaleCommand>();
         CreateMap<GetSaleCommand, CartFilter>();
-
-        CreateMap<SaleResult, SaleResponse>();
-        CreateMap<SaleItemResult, SaleItemResponse>();
-        CreateMap<UserResult, UserResponse>();
-        CreateMap<ProductResult, ProductResponse>();
-
     }
 }

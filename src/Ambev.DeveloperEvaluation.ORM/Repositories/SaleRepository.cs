@@ -20,6 +20,7 @@ public class SaleRepository : ISaleRepository
             .Include(i=> i.Items.Where(w => w.Status == SaleItemStatus.Active))
                 .ThenInclude(i=> i.Product)
             .Include(i => i.User)
+            .Include(i => i.Branch)
             .AsNoTracking()
             .Where(w => w.Id.Equals(saleId))
             .FirstOrDefaultAsync(cancellationToken);

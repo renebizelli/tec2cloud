@@ -6,6 +6,7 @@ public class Sale
 {
     public int Id { get; set; }
     public Guid BranchId { get; set; }
+    public Branch? Branch { get; set; }
     public SaleStatus Status { get; set; } 
     public Guid UserId { get; set; }
     public User? User { get; set; }

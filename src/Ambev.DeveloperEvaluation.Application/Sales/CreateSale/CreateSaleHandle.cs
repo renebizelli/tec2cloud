@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared;
+﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared.Results;
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Events;

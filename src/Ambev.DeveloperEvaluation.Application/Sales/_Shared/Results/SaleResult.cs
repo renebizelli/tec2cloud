@@ -1,11 +1,11 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Enums;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales._Shared;
+namespace Ambev.DeveloperEvaluation.Application.Sales._Shared.Results;
 
 public class SaleResult
 {
     public int Id { get; set; }
-    public Guid BranchId { get; set; }
+    public BranchResult Branch { get; set; } = new();
     public SaleStatus Status { get; set; }
     public UserResult User { get; set; } = new();
     public decimal TotalAmount { get; set; }

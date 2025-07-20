@@ -1,6 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Enums;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales._Shared;
+namespace Ambev.DeveloperEvaluation.Application.Sales._Shared.Results;
 
 public class SaleItemResult
 {

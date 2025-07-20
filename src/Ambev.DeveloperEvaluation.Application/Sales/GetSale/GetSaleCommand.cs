@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared;
+﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared.Results;
 using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.GetSale;
