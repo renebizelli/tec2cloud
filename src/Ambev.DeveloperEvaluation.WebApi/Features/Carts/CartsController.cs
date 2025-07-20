@@ -1,7 +1,9 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Carts.CreateOrUpdateCart;
+using Ambev.DeveloperEvaluation.Application.Carts.DeleteCart;
 using Ambev.DeveloperEvaluation.Application.Carts.GetCartByUser;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Carts.CreateOrUpdateCart;
+using Ambev.DeveloperEvaluation.WebApi.Features.Carts.DeleteCart;
 using Ambev.DeveloperEvaluation.WebApi.Features.Carts.GetCartByUser;
 using AutoMapper;
 using MediatR;
@@ -49,11 +51,6 @@ public class CartsController : BaseController
         return Created();
     }
 
-    /// <summary>
-    /// Retrieves a cart by user
-    /// </summary>
-    /// <param name="cancellationToken">Cancellation token</param>
-    /// <returns>The cart details if found</returns>
     [HttpGet()]
     [ProducesResponseType(typeof(ApiResponseWithData<GetCartByUserResponse>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCart(CancellationToken cancellationToken)
@@ -69,4 +66,18 @@ public class CartsController : BaseController
 
         return Ok(result);
     }
+
+    [HttpDelete()]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> DeleteCart(CancellationToken cancellationToken)
+    {
+        var request = new DeleteCartRequest { UserId = GetCurrentUserId() };
+
+        var command = _mapper.Map<DeleteCartCommand>(request);
+
+        await _mediator.Send(command, cancellationToken);
+
+        return Accepted();
+    }
+
 }
