@@ -16,7 +16,7 @@ public class SalePricing : ISalePricing
     {
         foreach (var item in sale.ActiveItems())
         {
-            var product = await _productRepository.Get(item.ProductId, cancellationToken);
+            var product = await _productRepository.GetAsync(item.ProductId, cancellationToken);
 
             if (product == null) throw new InvalidOperationException($"Invalid product id {item.ProductId}");
 
