@@ -1,8 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
-using Ambev.DeveloperEvaluation.Domain.Services.Discount;
 
-namespace Ambev.DeveloperEvaluation.Domain.Services.Pricing;
+namespace Ambev.DeveloperEvaluation.Domain.Services.Sales.Pricing;
 
 public class SalePricing : ISalePricing
 {
@@ -22,12 +21,6 @@ public class SalePricing : ISalePricing
             if (product == null) throw new InvalidOperationException($"Invalid product id {item.ProductId}");
 
             item.Price = product.Price;
-
-            var discount = DiscountFactory.Get(item.Quantity);
-
-            discount.Calculate(item);
         }
-
-        sale.TotalAmountCalculate();
     }
 }

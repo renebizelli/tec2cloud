@@ -1,4 +1,4 @@
-﻿namespace Ambev.DeveloperEvaluation.Domain.Services.Discount;
+﻿namespace Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
 
 public class DiscountFactory
 {

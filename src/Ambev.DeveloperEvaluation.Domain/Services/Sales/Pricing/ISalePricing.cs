@@ -1,6 +1,6 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
 
-namespace Ambev.DeveloperEvaluation.Domain.Services;
+namespace Ambev.DeveloperEvaluation.Domain.Services.Sales.Pricing;
 
 public interface ISalePricing
 {

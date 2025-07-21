@@ -1,5 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Enums;
-using Ambev.DeveloperEvaluation.Domain.Services.Discount;
+using Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 

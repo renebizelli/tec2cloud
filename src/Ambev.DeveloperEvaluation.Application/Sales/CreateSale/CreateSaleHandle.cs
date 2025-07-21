@@ -3,7 +3,8 @@ using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Events;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
-using Ambev.DeveloperEvaluation.Domain.Services;
+using Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
+using Ambev.DeveloperEvaluation.Domain.Services.Sales.Pricing;
 using Ambev.DeveloperEvaluation.Domain.Specifications;
 using AutoMapper;
 using MediatR;
@@ -16,6 +17,7 @@ public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, SaleResult>
     private readonly ISaleRepository _saleRepository;
     private readonly ICartRepository _cartRepository;
     private readonly ISalePricing _salePricing;
+    private readonly ISaleDiscountApplier _discountApplier;
     private readonly IBus _bus;
     private readonly IMapper _mapper;
 
@@ -23,12 +25,14 @@ public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, SaleResult>
         ISaleRepository saleRepository,
         ICartRepository cartRepository,
         ISalePricing salePricing,
+        ISaleDiscountApplier discountApplier,
         Rebus.Bus.IBus bus,
         IMapper mapper)
     {
         _saleRepository = saleRepository;
         _cartRepository = cartRepository;
         _salePricing = salePricing;
+        _discountApplier = discountApplier;
         _bus = bus;
         _mapper = mapper;
     }
@@ -41,9 +45,11 @@ public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, SaleResult>
 
         var sale = _mapper.Map<Sale>(cart);
 
-        SaleItemQuantityValidation(sale);
+        SaleItemAllowedQuantityValidation(sale);
 
         await _salePricing.Pricing(sale);
+
+        await _discountApplier.Applier(sale);
 
         await _saleRepository.CreateSale(sale, cancellationToken);
 
@@ -67,12 +73,12 @@ public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, SaleResult>
         return cart;
     }
 
-    private static void SaleItemQuantityValidation(Sale sale)
+    private void SaleItemAllowedQuantityValidation(Sale sale)
     {
-        var saleItemQuantitySpec = new SaleItemQuantitySpecification();
+        var spec = new SaleItemAllowedQuantitySpecification();
         foreach (var item in sale.Items)
         {
-            if (!saleItemQuantitySpec.IsSatisfiedBy(item))
+            if (!spec.IsSatisfiedBy(item))
             {
                 throw new DomainException("Invalid quantity of item");
             }

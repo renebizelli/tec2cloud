@@ -2,7 +2,7 @@
 
 namespace Ambev.DeveloperEvaluation.Domain.Specifications;
 
-public class SaleItemQuantitySpecification : ISpecification<SaleItem>
+public class SaleItemAllowedQuantitySpecification : ISpecification<SaleItem>
 {
     public bool IsSatisfiedBy(SaleItem item)
     {
