@@ -1,6 +1,12 @@
-﻿namespace Ambev.DeveloperEvaluation.Application.Products.GetProducts;
+﻿namespace Ambev.DeveloperEvaluation.Application.Products.ListProducts;
 
-public class GetProductResult
+public class ProductsResult
+{
+    public int TotalCount { get; set; }
+    public List<ProductResult> Products { get; set; } = [];
+}
+
+public class ProductResult
 {
     public int Id { get; set; }
     public string Title { get; set; } = string.Empty;

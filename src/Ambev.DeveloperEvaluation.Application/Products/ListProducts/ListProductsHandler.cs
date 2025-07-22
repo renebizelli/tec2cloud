@@ -1,11 +1,10 @@
-﻿using Ambev.DeveloperEvaluation.Application.Users.GetUser;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.Products.GetProducts;
+namespace Ambev.DeveloperEvaluation.Application.Products.ListProducts;
 
-public class GetProductsHandler : IRequestHandler<GetProductsCommand, List<GetProductResult>>
+public class ListProductsHandler : IRequestHandler<ListProductsCommand, ProductsResult>
 {
 
     private readonly IProductRepository _productRepository;
@@ -17,7 +16,7 @@ public class GetProductsHandler : IRequestHandler<GetProductsCommand, List<GetPr
     /// <param name="productRepository">The Product repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
     /// <param name="validator">The validator for GetProductCommand</param>
-    public GetProductsHandler(
+    public ListProductsHandler(
         IProductRepository productRepository,
         IMapper mapper)
     {
@@ -25,10 +24,10 @@ public class GetProductsHandler : IRequestHandler<GetProductsCommand, List<GetPr
         _mapper = mapper;
     }
 
-    public async Task<List<GetProductResult>> Handle(GetProductsCommand request, CancellationToken cancellationToken)
+    public async Task<ProductsResult> Handle(ListProductsCommand request, CancellationToken cancellationToken)
     {
-        var products = await _productRepository.GetProductsAsync(cancellationToken);
+        var paginationData = await _productRepository.ListProductsAsync(request, cancellationToken);
 
-        return _mapper.Map<List<GetProductResult>>(products);
+        return _mapper.Map<ProductsResult>(paginationData);
     }
 }

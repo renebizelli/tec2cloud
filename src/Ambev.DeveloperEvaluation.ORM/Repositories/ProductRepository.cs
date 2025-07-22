@@ -1,7 +1,9 @@
-﻿using Ambev.DeveloperEvaluation.Common.Security;
-using Ambev.DeveloperEvaluation.Domain.Entities;
+﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+using Ambev.DeveloperEvaluation.Domain.Interfaces;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
+using Ambev.DeveloperEvaluation.ORM.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 
@@ -39,9 +41,30 @@ public class ProductRepository : IProductRepository
         return await _context.Products.AsNoTracking().FirstOrDefaultAsync(f => f.Id.Equals(productId), cancellationToken);
     }
 
-    public async Task<IList<Product>> GetProductsAsync(CancellationToken cancellationToken = default)
+    public async Task<(int, IList<Product>)> ListProductsAsync(IProductQueryOptions queryOptions, CancellationToken cancellationToken)
     {
-        return await _context.Products.AsNoTracking().Where(w => w.Active).ToListAsync(cancellationToken);
+        var allowedOrderFields = new Dictionary<string, Expression<Func<Product, object>>>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["title"] = p => p.Title,
+            ["price"] = p => p.Price,
+            ["category"] = p => p.Category,
+        };
+
+        var query = _context.Products
+                    .AsNoTracking()
+                    .Where(w => w.Active)
+                    .ApplyWhereLike(queryOptions.Category, w => w.Category)
+                    .ApplyWhereLike(queryOptions.Title, w => w.Title)
+                    .ApplyWhereRange(queryOptions.MinPrice, queryOptions.MaxPrice, w => w.Price)
+                    .ApplyOrdering(queryOptions.OrderCriteria, allowedOrderFields);
+
+        var count = await query.CountAsync();
+
+        var products = await query
+                        .ApplyPaging(queryOptions.Page, queryOptions.PageSize)
+                        .ToListAsync(cancellationToken);
+
+        return (count, products);
     }
 
     public async Task UpdateAsync(Product product, CancellationToken cancellationToken)
