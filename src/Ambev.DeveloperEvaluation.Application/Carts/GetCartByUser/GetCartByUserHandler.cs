@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Carts.GetCartByUser;
 
-public class GetCartByUserHandle : IRequestHandler<GetCartByUserCommand, GetCartByUserResult>
+public class GetCartByUserHandler : IRequestHandler<GetCartByUserCommand, GetCartByUserResult>
 {
     private readonly ICartRepository _repository;
     private readonly IMapper _mapper;
@@ -16,7 +16,7 @@ public class GetCartByUserHandle : IRequestHandler<GetCartByUserCommand, GetCart
     /// <param name="cartRepository">The Cart repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
     /// <param name="validator">The validator for GetCartByUserCommand</param>
-    public GetCartByUserHandle(
+    public GetCartByUserHandler(
         ICartRepository cartRepository,
         IMapper mapper)
     {

@@ -5,12 +5,12 @@ using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Carts.DeleteCart;
 
-internal class DeleteCartHandle : IRequestHandler<DeleteCartCommand>
+internal class DeleteCartHandler : IRequestHandler<DeleteCartCommand>
 {
     private readonly ICartRepository _repository;
     private readonly IMapper _mapper;
 
-    public DeleteCartHandle(
+    public DeleteCartHandler(
         ICartRepository cartRepository,
         IMapper mapper)
     {

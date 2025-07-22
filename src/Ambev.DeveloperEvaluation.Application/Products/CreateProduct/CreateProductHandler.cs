@@ -3,18 +3,21 @@ using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
 using MediatR;
 using FluentValidation;
+using Microsoft.Extensions.Logging;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
 
-public class CreateProductHandle : IRequestHandler<CreateProductCommand, CreateProductResult>
+public class CreateProductHandler : IRequestHandler<CreateProductCommand, CreateProductResult>
 {
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
+    private readonly ILogger<CreateProductHandler> _logger;
 
-    public CreateProductHandle(IProductRepository productRepository, IMapper mapper)
+    public CreateProductHandler(IProductRepository productRepository, IMapper mapper, ILogger<CreateProductHandler> logger)
     {
         _productRepository = productRepository;
         _mapper = mapper;
+        _logger = logger;
     }
 
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)

@@ -3,7 +3,7 @@ using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.ListProducts;
 
-internal class ListProductsProfile : Profile
+public class ListProductsProfile : Profile
 {
     public ListProductsProfile()
     {

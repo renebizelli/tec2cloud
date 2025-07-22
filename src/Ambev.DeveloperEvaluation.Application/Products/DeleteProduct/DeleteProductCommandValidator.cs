@@ -7,6 +7,6 @@ public class DeleteProductCommandValidator : AbstractValidator<DeleteProductComm
 {
     public DeleteProductCommandValidator()
     {
-        RuleFor(product => product.Id).NotEqual(0);
+        RuleFor(product => product.Id).NotEqual(0).WithMessage("Invalid product Id");
     }
 }

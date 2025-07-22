@@ -1,19 +1,19 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
-using AutoMapper;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
 
-public class DeleteProductHandle : IRequestHandler<DeleteProductCommand, DeleteProductResponse>
+public class DeleteProductHandler : IRequestHandler<DeleteProductCommand, DeleteProductResponse>
 {
     private readonly IProductRepository _productRepository;
-    private readonly IMapper _mapper;
+    private readonly ILogger<DeleteProductHandler> _Logger;
 
-    public DeleteProductHandle(IProductRepository productRepository, IMapper mapper)
+    public DeleteProductHandler(IProductRepository productRepository, ILogger<DeleteProductHandler> logger)
     {
         _productRepository = productRepository;
-        _mapper = mapper;
+        _Logger = logger;
     }
 
     public async Task<DeleteProductResponse> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
@@ -23,7 +23,6 @@ public class DeleteProductHandle : IRequestHandler<DeleteProductCommand, DeleteP
 
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
-
 
         var success = await _productRepository.DeleteAsync(command.Id, cancellationToken);
         if (!success)

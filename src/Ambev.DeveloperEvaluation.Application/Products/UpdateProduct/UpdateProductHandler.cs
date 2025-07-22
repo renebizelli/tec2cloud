@@ -1,20 +1,22 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
+﻿using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
-using MediatR;
 using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.UpdateProduct;
 
-public class UpdateProductHandle : IRequestHandler<UpdateProductCommand, UpdateProductResult>
+public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, UpdateProductResult>
 {
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
+    private readonly ILogger<UpdateProductHandler> _logger;
 
-    public UpdateProductHandle(IProductRepository productRepository, IMapper mapper)
+    public UpdateProductHandler(IProductRepository productRepository, IMapper mapper, ILogger<UpdateProductHandler> logger)
     {
         _productRepository = productRepository;
         _mapper = mapper;
+        _logger = logger;
     }
 
     public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
@@ -31,7 +33,7 @@ public class UpdateProductHandle : IRequestHandler<UpdateProductCommand, UpdateP
 
         _mapper.Map(command, foundProduct);
 
-         await _productRepository.UpdateAsync(foundProduct, cancellationToken);
+          //await _productRepository.UpdateAsync(foundProduct, cancellationToken);
 
         var result = _mapper.Map<UpdateProductResult>(foundProduct);
 

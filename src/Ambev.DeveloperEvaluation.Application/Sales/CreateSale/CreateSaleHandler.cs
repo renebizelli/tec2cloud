@@ -12,7 +12,7 @@ using Rebus.Bus;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
-public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, SaleResult>
+public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
 {
     private readonly ISaleRepository _saleRepository;
     private readonly ICartRepository _cartRepository;
@@ -21,7 +21,7 @@ public class CreateSaleHandle : IRequestHandler<CreateSaleCommand, SaleResult>
     private readonly IBus _bus;
     private readonly IMapper _mapper;
 
-    public CreateSaleHandle(
+    public CreateSaleHandler(
         ISaleRepository saleRepository,
         ICartRepository cartRepository,
         ISalePricing salePricing,
