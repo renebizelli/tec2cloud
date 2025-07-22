@@ -33,7 +33,7 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Update
 
         _mapper.Map(command, foundProduct);
 
-          //await _productRepository.UpdateAsync(foundProduct, cancellationToken);
+        await _productRepository.UpdateAsync(foundProduct, cancellationToken);
 
         var result = _mapper.Map<UpdateProductResult>(foundProduct);
 

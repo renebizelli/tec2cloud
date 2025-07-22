@@ -7,7 +7,9 @@ using Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
 using Ambev.DeveloperEvaluation.Domain.Services.Sales.Pricing;
 using Ambev.DeveloperEvaluation.Domain.Specifications;
 using AutoMapper;
+using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Rebus.Bus;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
@@ -20,6 +22,7 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
     private readonly ISaleDiscountApplier _discountApplier;
     private readonly IBus _bus;
     private readonly IMapper _mapper;
+    private readonly ILogger<CreateSaleHandler> _logger;
 
     public CreateSaleHandler(
         ISaleRepository saleRepository,
@@ -27,7 +30,8 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
         ISalePricing salePricing,
         ISaleDiscountApplier discountApplier,
         Rebus.Bus.IBus bus,
-        IMapper mapper)
+        IMapper mapper,
+        ILogger<CreateSaleHandler> logger)
     {
         _saleRepository = saleRepository;
         _cartRepository = cartRepository;
@@ -35,11 +39,17 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
         _discountApplier = discountApplier;
         _bus = bus;
         _mapper = mapper;
+        _logger = logger;
     }
 
     public async Task<SaleResult> Handle(CreateSaleCommand command, CancellationToken cancellationToken)
     {
         var filter = _mapper.Map<CartFilter>(command);
+
+        var validationResult = await filter.ValidateAsync(cancellationToken);
+
+        if (!validationResult.IsValid)
+            throw new ValidationException(validationResult.Errors);
 
         var cart = await GetCart(filter, cancellationToken);
 
@@ -78,7 +88,7 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
         var spec = new SaleItemAllowedQuantitySpecification();
         foreach (var item in sale.Items)
         {
-            if (!spec.IsSatisfiedBy(item))
+            if (!spec.IsSatisfiedBy(item.Quantity))
             {
                 throw new DomainException("Invalid quantity of item");
             }

@@ -1,5 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Common.Validation;
-using Ambev.DeveloperEvaluation.Domain.Validation;
+﻿using Ambev.DeveloperEvaluation.Domain.Validation;
+using FluentValidation.Results;
 
 namespace Ambev.DeveloperEvaluation.Domain.Common;
 
@@ -8,15 +8,9 @@ public class CartFilter
     public Guid UserId { get; set; }
     public Guid BranchId { get; set; }
 
-    public ValidationResultDetail Validate()
+    public async Task<ValidationResult> ValidateAsync(CancellationToken cancellationToken)
     {
         var validator = new CartFilterValidator();
-        var result = validator.Validate(this);
-        return new ValidationResultDetail
-        {
-            IsValid = result.IsValid,
-            Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
-        };
+        return await validator.ValidateAsync(this, cancellationToken);
     }
-
 }

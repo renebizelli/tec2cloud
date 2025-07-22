@@ -1,11 +1,9 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+﻿namespace Ambev.DeveloperEvaluation.Domain.Specifications;
 
-namespace Ambev.DeveloperEvaluation.Domain.Specifications;
-
-public class SaleItemAllowedQuantitySpecification : ISpecification<SaleItem>
+public class SaleItemAllowedQuantitySpecification : ISpecification<int>
 {
-    public bool IsSatisfiedBy(SaleItem item)
+    public bool IsSatisfiedBy(int quantity)
     {
-        return item.Quantity > 0 && item.Quantity <= 20;
+        return quantity > 0 && quantity <= 20;
     }
 }

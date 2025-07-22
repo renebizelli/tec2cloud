@@ -7,5 +7,5 @@ public interface ICartRepository
 {
     Task<Cart?> GetCartByUser(CartFilter cartFilter, CancellationToken cancellationToken = default);
     Task CreateOrUpdateCart(Cart cart, CancellationToken cancellationToken = default);
-    Task DeleteCart(CartFilter cartFilter, CancellationToken cancellationToken = default);
+    Task<bool> DeleteCart(CartFilter cartFilter, CancellationToken cancellationToken = default);
 }

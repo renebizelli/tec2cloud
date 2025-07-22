@@ -1,6 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
+using FluentValidation;
 using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Carts.GetCartByUser;
@@ -27,6 +28,11 @@ public class GetCartByUserHandler : IRequestHandler<GetCartByUserCommand, GetCar
     public async Task<GetCartByUserResult> Handle(GetCartByUserCommand command, CancellationToken cancellationToken)
     {
         var filter = _mapper.Map<CartFilter>(command);
+
+        var validationResult = await filter.ValidateAsync(cancellationToken);
+
+        if (!validationResult.IsValid)
+            throw new ValidationException(validationResult.Errors);
 
         var cart = await _repository.GetCartByUser(filter, cancellationToken);
 
