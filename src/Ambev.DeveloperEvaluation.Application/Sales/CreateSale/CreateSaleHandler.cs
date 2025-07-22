@@ -59,7 +59,7 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
 
         await _salePricing.Pricing(sale);
 
-        await _discountApplier.Applier(sale);
+        _discountApplier.Applier(sale);
 
         await _saleRepository.CreateSale(sale, cancellationToken);
 

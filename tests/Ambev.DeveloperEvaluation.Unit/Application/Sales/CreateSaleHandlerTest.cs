@@ -105,7 +105,7 @@ public class CreateSaleHandlerTest
         var resultHandle = await _handler.Handle(command, CancellationToken.None);
 
         await _salePricing.Received(1).Pricing(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
-        await _discountApplier.Received(1).Applier(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
+        _discountApplier.Received(1).Applier(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
         await _saleRepository.Received(1).CreateSale(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
         await _cartRepository.Received(1).DeleteCart(Arg.Any<CartFilter>(), Arg.Any<CancellationToken>());
         await _bus.Received(1).Send(Arg.Any<SaleCreatedEvent>());

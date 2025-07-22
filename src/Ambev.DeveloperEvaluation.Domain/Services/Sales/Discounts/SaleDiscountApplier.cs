@@ -5,7 +5,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
 
 public class SaleDiscountApplier : ISaleDiscountApplier
 {
-    public async Task Applier(Sale sale, CancellationToken cancellationToken = default)
+    public void Applier(Sale sale, CancellationToken cancellationToken = default)
     {
         if (!AllowedDiscount(sale)) return;
 
