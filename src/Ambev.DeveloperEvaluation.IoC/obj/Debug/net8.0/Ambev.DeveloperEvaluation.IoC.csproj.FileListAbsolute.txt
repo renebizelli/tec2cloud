@@ -14,8 +14,13 @@ E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\back
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.DeveloperEvaluation.IoC.AssemblyInfoInputs.cache
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.DeveloperEvaluation.IoC.AssemblyInfo.cs
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.DeveloperEvaluation.IoC.csproj.CoreCompileInputs.cache
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.DeveloperEvaluation.IoC.sourcelink.json
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.De.F34954F9.Up2Date
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.DeveloperEvaluation.IoC.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\refint\Ambev.DeveloperEvaluation.IoC.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.DeveloperEvaluation.IoC.pdb
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\ref\Ambev.DeveloperEvaluation.IoC.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.NoSQL.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.NoSQL.pdb
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Processors.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Processors.pdb
