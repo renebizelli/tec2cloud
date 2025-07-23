@@ -23,6 +23,7 @@ public class SaleRepository : ISaleRepository
         return await _context.Sales
             .Include(i => i.Items)
             .Where(w => w.Id.Equals(saleId))
+            .Where(w => w.Status == SaleStatus.Active)
             .FirstOrDefaultAsync(cancellationToken);
     }
 
