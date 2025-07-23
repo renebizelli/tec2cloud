@@ -1,5 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared.Results;
-using Ambev.DeveloperEvaluation.Domain.Entities;
+﻿using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using AutoMapper;
 
@@ -14,7 +13,6 @@ public class CreateSaleProfile : Profile
             .ForMember(f => f.UserId, a => a.MapFrom(m => m.UserId))
             .ForMember(f => f.BranchId, a => a.MapFrom(m => m.BranchId))
             .ForMember(f => f.Status, a => a.MapFrom(m => SaleStatus.Active))
-            .ForMember(f => f.TotalAmount, a => a.Ignore())
             .ForMember(f => f.CreatedAt, a => a.MapFrom(m => DateTime.UtcNow))
             .ForMember(f => f.Items, a => a.MapFrom(m => m.Items));
 

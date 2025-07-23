@@ -4,8 +4,8 @@ namespace Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
 
 public class Discount10 : IDiscount
 {
-    public void Calculate(SaleItem item)
+    public void Apply(SaleItem item)
     {
-        item.Discount = item.Price * 0.1M;
+        item.ApplyDiscount(item.Price * 0.1M);
     }
 }

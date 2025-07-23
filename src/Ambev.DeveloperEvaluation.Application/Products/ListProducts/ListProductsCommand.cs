@@ -1,9 +1,10 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Interfaces;
+﻿using Ambev.DeveloperEvaluation.Application.Common;
+using Ambev.DeveloperEvaluation.Domain.Interfaces;
 using MediatR;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.ListProducts;
 
-public class ListProductsCommand : IRequest<ProductsResult>, IProductQueryOptions
+public class ListProductsCommand : IRequest<PaginatedResult<ProductResult>>, IProductQueryOptions
 {
     public List<(string, bool)> OrderCriteria { get; set; } = new();
     public string? Category { get; set; }

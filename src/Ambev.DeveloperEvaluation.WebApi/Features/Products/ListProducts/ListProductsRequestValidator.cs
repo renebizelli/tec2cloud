@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
+﻿using Ambev.DeveloperEvaluation.WebApi.Common;
 using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProducts;
@@ -7,6 +7,8 @@ public class ListProductsRequestValidator : AbstractValidator<ListProductsReques
 {
     public ListProductsRequestValidator()
     {
+        Include(new ListRequestValidator());
+
         RuleFor(request => request)
             .Must(m =>
                 ((m.MinPrice > 0 && m.MaxPrice > 0) && m.MinPrice <= m.MaxPrice) ||

@@ -8,6 +8,7 @@ using NSubstitute.ReturnsExtensions;
 using System.Reflection.Metadata;
 using System.Threading;
 using Xunit;
+using Xunit.Abstractions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Ambev.DeveloperEvaluation.Unit.Domain.Services;
@@ -28,18 +29,14 @@ public class SalePricingTest
     {
         var product = SalePricingTestData.GenerateValidProduct();
 
-        var sale = new Sale
-        {
-            Items = new List<SaleItem>
+        var sale = new Sale();
+
+        var items = new List<SaleItem>
             {
-                new SaleItem
-                {
-                    Status = DeveloperEvaluation.Domain.Enums.SaleItemStatus.Active,
-                    Product = product,
-                    ProductId = product.Id,
-                }
-            }
-        };
+                new SaleItem(0, product, 0, 10, 10, 0)
+            };
+
+        sale.SetItems(items);
 
         _productRepository.GetAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(product);
 
@@ -51,17 +48,14 @@ public class SalePricingTest
     [Fact(DisplayName = "Given invalid product data When apply pricing Then should have error")]
     public async Task Handle_InvalidProduct_ShouldHaveError()
     {
-        var sale = new Sale
-        {
-            Items = new List<SaleItem>
+        var sale = new Sale();
+
+        var items = new List<SaleItem>
             {
-                new SaleItem
-                {
-                    Status = DeveloperEvaluation.Domain.Enums.SaleItemStatus.Active,
-                    ProductId = 9,
-                }
-            }
-        };
+                new SaleItem(0, new Product { Id = 0 }, 0, 10, 10, 0)
+            };
+
+        sale.SetItems(items);
 
         _productRepository.GetAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).ReturnsNull();
 

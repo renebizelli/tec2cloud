@@ -1,4 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Application.Products.ListProducts;
+﻿using Ambev.DeveloperEvaluation.Application.Common;
+using Ambev.DeveloperEvaluation.Application.Products.ListProducts;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using AutoMapper;
 
@@ -11,7 +12,7 @@ public class ListProductsProfile : Profile
         CreateMap<ListProductsRequest, Application.Products.ListProducts.ListProductsCommand>()
             .ForMember(f => f.OrderCriteria, o => o.MapFrom(m => OrderBuilder.Build(m._Order, "title")));
 
-        CreateMap<ProductsResult, ProductsResponse>();
+        CreateMap<PaginatedResult<ProductResult>, Paginated<ProductResponse>>();
         CreateMap<ProductResult, ProductResponse>();
     }
 }

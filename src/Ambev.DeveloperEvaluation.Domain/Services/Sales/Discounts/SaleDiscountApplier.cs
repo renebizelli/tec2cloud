@@ -12,8 +12,10 @@ public class SaleDiscountApplier : ISaleDiscountApplier
         foreach (var item in sale.ActiveItems())
         {
             var discount = DiscountFactory.Get(item.Quantity);
-            discount.Calculate(item);
+            discount.Apply(item);
         }
+
+        sale.TotalAmountCalculate();
     }
 
     private bool AllowedDiscount(Sale sale)

@@ -20,7 +20,7 @@ internal class GetSaleHandler : IRequestHandler<GetSaleCommand, SaleResult>
 
     public async Task<SaleResult> Handle(GetSaleCommand request, CancellationToken cancellationToken)
     {
-        var sale = await _saleRepository.Get(request.SaleId, cancellationToken);
+        var sale = await _saleRepository.GetAsync(request.SaleId, cancellationToken);
 
         if (sale == null) throw new InvalidOperationException("Invalid saled");
 

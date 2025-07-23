@@ -2,6 +2,7 @@
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Ambev.DeveloperEvaluation.Unit.Domain.Services;
 
@@ -18,42 +19,17 @@ public class SaleDiscountApplierTest
     [Fact(DisplayName = "Given valid sale allowed to discount When apply discounts")]
     public void Handle_ValidProduct_ShouldNotHaveError()
     {
-        var sale = new Sale
-        {
-            Items = new List<SaleItem>
+        var sale = new Sale();
+        var items = new List<SaleItem>
             {
-                new SaleItem
-                {
-                    Quantity = 1,
-                    Price = 10,
-                    Status = SaleItemStatus.Active,
-                },
-                new SaleItem
-                {
-                    Quantity = 4,
-                    Price = 10,
-                    Status = SaleItemStatus.Active,
-                },
-                new SaleItem
-                {
-                    Quantity = 9,
-                    Price = 10,
-                    Status = SaleItemStatus.Active,
-                },
-                new SaleItem
-                {
-                    Quantity = 11,
-                    Price = 10,
-                    Status = SaleItemStatus.Active,
-                },
-                new SaleItem
-                {
-                    Quantity = 19,
-                    Price = 10,
-                    Status = SaleItemStatus.Active,
-                }
-            }
-        };
+                new SaleItem(0, new Product { Id = 1 }, 1, 10, 0, 0),
+                new SaleItem(0, new Product { Id = 1 }, 4, 10, 0, 0),
+                new SaleItem(0, new Product { Id = 1 }, 9, 10, 0, 0),
+                new SaleItem(0, new Product { Id = 1 }, 11, 10, 0, 0),
+                new SaleItem(0, new Product { Id = 1 }, 19, 10, 0, 0)
+            };
+
+        sale.SetItems(items);
 
         _saleDiscountApplier.Applier(sale);
 
@@ -78,22 +54,17 @@ public class SaleDiscountApplierTest
     [Fact(DisplayName = "Given a sale with less items than allowed to have discount then no apply discount")]
     public void Handle_Less_Items_Allowed_Discount_No_Apply_Discount()
     {
-        var sale = new Sale
-        {
-            Items = new List<SaleItem>
+        var sale = new Sale();
+        var items = new List<SaleItem>
             {
-                new SaleItem
-                {
-                    Quantity = 10,
-                    Price = 10,
-                    Status = SaleItemStatus.Active,
-                },
-            }
-        };
+                new SaleItem(0, new Product { Id = 1 }, 10, 10, 0, 0),
+            }; 
+        
+        sale.SetItems(items);
 
         for (int i = 0; i < 5; i++)
         {
-            sale.Items.Add(new SaleItem { Quantity = 10, Price = 10, Status = SaleItemStatus.Cancelled });
+            new SaleItem(0, new Product { Id = 1 }, 10, 10, 0, 0).Cancel();
         }
 
         _saleDiscountApplier.Applier(sale);

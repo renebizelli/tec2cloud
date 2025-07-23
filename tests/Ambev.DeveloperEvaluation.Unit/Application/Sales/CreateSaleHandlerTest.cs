@@ -66,10 +66,11 @@ public class CreateSaleHandlerTest
             BranchId = cart.BranchId,
             UserId = cart.UserId,
             Status = SaleStatus.Active,
-            Items = cart.Items.Select(s => new SaleItem { Quantity = s.Quantity, ProductId = s.ProductId  }).ToList(),
-            TotalAmount = 10,
             CreatedAt = DateTime.UtcNow
         };
+
+        var items = cart.Items.Select(s => new SaleItem(0, new Product { Id = s.ProductId }, s.Quantity, 0, 0, 1)).ToList();
+        sale.SetItems(items);
 
         var cartFilter = new CartFilter
         {
@@ -100,13 +101,13 @@ public class CreateSaleHandlerTest
         _mapper.Map<SaleResult>(sale).Returns(result);
 
         _cartRepository.GetCartByUser(Arg.Any<CartFilter>(), Arg.Any<CancellationToken>()).Returns(cart);
-       _saleRepository.Get(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(sale);
+       _saleRepository.GetAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(sale);
 
         var resultHandle = await _handler.Handle(command, CancellationToken.None);
 
         await _salePricing.Received(1).Pricing(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
         _discountApplier.Received(1).Applier(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
-        await _saleRepository.Received(1).CreateSale(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
+        await _saleRepository.Received(1).CreateSaleAsync(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
         await _cartRepository.Received(1).DeleteCart(Arg.Any<CartFilter>(), Arg.Any<CancellationToken>());
         await _bus.Received(1).Send(Arg.Any<SaleCreatedEvent>());
 

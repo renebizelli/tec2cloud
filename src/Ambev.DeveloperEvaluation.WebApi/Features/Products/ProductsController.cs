@@ -102,9 +102,6 @@ public class ProductsController : BaseController
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> ListProducts([FromQuery] ListProductsRequest request, CancellationToken cancellationToken)
     {
-        request.Page = request.Page.Equals(0) ? 1 : request.Page;
-        request.PageSize = request.PageSize.Equals(0) ? 10 : request.PageSize;
-
         var validator = new ListProductsRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
@@ -115,9 +112,9 @@ public class ProductsController : BaseController
 
         var response = await _mediator.Send(command, cancellationToken);
 
-        var data = _mapper.Map<ProductsResponse>(response);
+        var data = _mapper.Map<Paginated<ProductResponse>>(response);
 
-        var paginatedList = new PaginatedList<ProductResponse>(data.Products, data.TotalCount, request.Page, request.PageSize);
+        var paginatedList = new PaginatedList<ProductResponse>(data.Items, data.TotalCount, request.Page, request.PageSize);
 
         return OkPaginated(paginatedList);
     }

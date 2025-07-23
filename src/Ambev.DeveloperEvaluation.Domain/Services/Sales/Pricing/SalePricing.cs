@@ -20,7 +20,10 @@ public class SalePricing : ISalePricing
 
             if (product == null) throw new InvalidOperationException($"Invalid product id {item.ProductId}");
 
-            item.Price = product.Price;
+            item.ApplyPrice(product.Price);
+
         }
+
+        sale.TotalAmountCalculate();
     }
 }

@@ -1,9 +1,12 @@
 ﻿using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
+using Ambev.DeveloperEvaluation.Application.Sales.ListSales;
 using Ambev.DeveloperEvaluation.WebApi.Common;
+using Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProducts;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales._Shared.Responses;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales.ListSales;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -49,7 +52,7 @@ public class SalesController : BaseController
     [HttpGet("[controller]/{id}")]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateSale([FromRoute] Guid branch, [FromRoute] int id, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetSale([FromRoute] Guid branch, [FromRoute] int id, CancellationToken cancellationToken)
     {
         var request = new GetSaleRequest
         {
@@ -61,6 +64,27 @@ public class SalesController : BaseController
         var result = await _mediator.Send(command, cancellationToken);
 
         var response = _mapper.Map<SaleResponse>(result);
+
+        return Ok(response);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("[controller]")]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ListSale([FromQuery] ListSalesRequest request,  CancellationToken cancellationToken)
+    {
+        var validator = new ListSalesRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+
+        var command = _mapper.Map<ListSalesCommand>(request);
+
+        var result = await _mediator.Send(command, cancellationToken);
+
+        var response = _mapper.Map<Paginated<SaleResponse>>(result);
 
         return Ok(response);
     }

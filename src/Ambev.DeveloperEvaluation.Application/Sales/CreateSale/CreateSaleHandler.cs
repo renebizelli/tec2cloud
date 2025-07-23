@@ -61,13 +61,13 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
 
         _discountApplier.Applier(sale);
 
-        await _saleRepository.CreateSale(sale, cancellationToken);
+        await _saleRepository.CreateSaleAsync(sale, cancellationToken);
 
         await _cartRepository.DeleteCart(filter, cancellationToken);
 
         await _bus.Send(new SaleCreatedEvent { SaleId = sale.Id });
 
-        sale = await _saleRepository.Get(sale.Id, cancellationToken);
+        sale = await _saleRepository.GetAsync(sale.Id, cancellationToken);
 
         var result = _mapper.Map<SaleResult>(sale);
 

@@ -10,17 +10,19 @@ public class Sale
     public SaleStatus Status { get; set; } 
     public Guid UserId { get; set; }
     public User? User { get; set; }
-    public decimal TotalAmount { get; set; }
+    public decimal TotalAmount { get; private set; }
     public DateTime CreatedAt { get; set; }
-    public ICollection<SaleItem> Items { get; set; } = [];
+    public ICollection<SaleItem> Items { get; private set; } = [];
 
     public void TotalAmountCalculate()
     {
-        TotalAmount = Items.Sum(s => s.TotalPrice);
+        TotalAmount = ActiveItems().Sum(s => s.TotalPrice);
+    }
+
+    public void SetItems(ICollection<SaleItem> items) {
+        Items = items;
     }
 
     public ICollection<SaleItem> ActiveItems()
-    {
-        return Items.Where(w => w.Status == SaleItemStatus.Active).ToList();
-    }
+    => Items.Where(w => w.Status == SaleItemStatus.Active).ToList();
 }
