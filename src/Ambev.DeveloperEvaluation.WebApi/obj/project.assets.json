@@ -5077,8 +5077,8 @@
     },
     "Ambev.DeveloperEvaluation.NoSQL/1.0.0": {
       "type": "project",
-      "path": "../../../Ambev.DeveloperEvaluation.NoSQL/Ambev.DeveloperEvaluation.NoSQL.csproj",
-      "msbuildProject": "../../../Ambev.DeveloperEvaluation.NoSQL/Ambev.DeveloperEvaluation.NoSQL.csproj"
+      "path": "../Ambev.DeveloperEvaluation.NoSQL/Ambev.DeveloperEvaluation.NoSQL.csproj",
+      "msbuildProject": "../Ambev.DeveloperEvaluation.NoSQL/Ambev.DeveloperEvaluation.NoSQL.csproj"
     },
     "Ambev.DeveloperEvaluation.ORM/1.0.0": {
       "type": "project",
@@ -5087,8 +5087,8 @@
     },
     "Ambev.DeveloperEvaluation.Processors/1.0.0": {
       "type": "project",
-      "path": "../../../Ambev.DeveloperEvaluation.Processors/Ambev.DeveloperEvaluation.Processors.csproj",
-      "msbuildProject": "../../../Ambev.DeveloperEvaluation.Processors/Ambev.DeveloperEvaluation.Processors.csproj"
+      "path": "../Ambev.DeveloperEvaluation.Processors/Ambev.DeveloperEvaluation.Processors.csproj",
+      "msbuildProject": "../Ambev.DeveloperEvaluation.Processors/Ambev.DeveloperEvaluation.Processors.csproj"
     }
   },
   "projectFileDependencyGroups": {

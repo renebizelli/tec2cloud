@@ -50,6 +50,7 @@ E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\back
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\bin\Debug\net8.0\NSubstitute.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\bin\Debug\net8.0\OneOf.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\bin\Debug\net8.0\Rebus.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\bin\Debug\net8.0\Serilog.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\bin\Debug\net8.0\Serilog.AspNetCore.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\bin\Debug\net8.0\Serilog.Enrichers.Environment.dll
@@ -154,4 +155,3 @@ E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\back
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\obj\Debug\net8.0\Ambev.DeveloperEvaluation.Functional.pdb
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\obj\Debug\net8.0\Ambev.DeveloperEvaluation.Functional.genruntimeconfig.cache
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\obj\Debug\net8.0\ref\Ambev.DeveloperEvaluation.Functional.dll
-E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Functional\bin\Debug\net8.0\Rebus.dll

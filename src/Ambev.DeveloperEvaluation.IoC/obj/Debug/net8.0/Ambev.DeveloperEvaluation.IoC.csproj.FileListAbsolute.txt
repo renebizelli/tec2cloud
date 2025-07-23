@@ -4,11 +4,15 @@ E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\back
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Application.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Common.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Domain.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.NoSQL.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.ORM.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Processors.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Domain.pdb
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Application.pdb
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.NoSQL.pdb
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.ORM.pdb
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Common.pdb
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Processors.pdb
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.DeveloperEvaluation.IoC.csproj.AssemblyReference.cache
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.DeveloperEvaluation.IoC.GeneratedMSBuildEditorConfig.editorconfig
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.DeveloperEvaluation.IoC.AssemblyInfoInputs.cache
@@ -20,7 +24,3 @@ E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\back
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\refint\Ambev.DeveloperEvaluation.IoC.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\Ambev.DeveloperEvaluation.IoC.pdb
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\obj\Debug\net8.0\ref\Ambev.DeveloperEvaluation.IoC.dll
-E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.NoSQL.dll
-E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.NoSQL.pdb
-E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Processors.dll
-E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\src\Ambev.DeveloperEvaluation.IoC\bin\Debug\net8.0\Ambev.DeveloperEvaluation.Processors.pdb
