@@ -56,6 +56,7 @@ E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\back
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\bin\Debug\net8.0\NSubstitute.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\bin\Debug\net8.0\OneOf.dll
+E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\bin\Debug\net8.0\Rebus.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\bin\Debug\net8.0\Roslynator.Core.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\bin\Debug\net8.0\Roslynator.Testing.Common.dll
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\bin\Debug\net8.0\Roslynator.Testing.CSharp.dll
@@ -224,4 +225,3 @@ E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\back
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\obj\Debug\net8.0\Ambev.DeveloperEvaluation.Unit.pdb
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\obj\Debug\net8.0\Ambev.DeveloperEvaluation.Unit.genruntimeconfig.cache
 E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\obj\Debug\net8.0\ref\Ambev.DeveloperEvaluation.Unit.dll
-E:\Projetos\tests\Tec2Cloud\abi-gth-omnia-developer-evaluation (2)\template\backend\tests\Ambev.DeveloperEvaluation.Unit\bin\Debug\net8.0\Rebus.dll

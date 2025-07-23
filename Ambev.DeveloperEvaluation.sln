@@ -54,9 +54,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ambev.DeveloperEvaluation.NoSQL", "..\Ambev.DeveloperEvaluation.NoSQL\Ambev.DeveloperEvaluation.NoSQL.csproj", "{6A1B6E13-3FED-4094-98F0-924DC431D736}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ambev.DeveloperEvaluation.NoSQL", "src\Ambev.DeveloperEvaluation.NoSQL\Ambev.DeveloperEvaluation.NoSQL.csproj", "{6A1B6E13-3FED-4094-98F0-924DC431D736}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ambev.DeveloperEvaluation.Processors", "..\Ambev.DeveloperEvaluation.Processors\Ambev.DeveloperEvaluation.Processors.csproj", "{5CD7D9DD-2B88-4FDD-ADD6-CFCFA3BD50CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ambev.DeveloperEvaluation.Processors", "src\Ambev.DeveloperEvaluation.Processors\Ambev.DeveloperEvaluation.Processors.csproj", "{5CD7D9DD-2B88-4FDD-ADD6-CFCFA3BD50CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

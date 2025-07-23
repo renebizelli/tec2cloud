@@ -3224,8 +3224,8 @@
     },
     "Ambev.DeveloperEvaluation.NoSQL/1.0.0": {
       "type": "project",
-      "path": "../../../Ambev.DeveloperEvaluation.NoSQL/Ambev.DeveloperEvaluation.NoSQL.csproj",
-      "msbuildProject": "../../../Ambev.DeveloperEvaluation.NoSQL/Ambev.DeveloperEvaluation.NoSQL.csproj"
+      "path": "../Ambev.DeveloperEvaluation.NoSQL/Ambev.DeveloperEvaluation.NoSQL.csproj",
+      "msbuildProject": "../Ambev.DeveloperEvaluation.NoSQL/Ambev.DeveloperEvaluation.NoSQL.csproj"
     },
     "Ambev.DeveloperEvaluation.ORM/1.0.0": {
       "type": "project",
@@ -3234,8 +3234,8 @@
     },
     "Ambev.DeveloperEvaluation.Processors/1.0.0": {
       "type": "project",
-      "path": "../../../Ambev.DeveloperEvaluation.Processors/Ambev.DeveloperEvaluation.Processors.csproj",
-      "msbuildProject": "../../../Ambev.DeveloperEvaluation.Processors/Ambev.DeveloperEvaluation.Processors.csproj"
+      "path": "../Ambev.DeveloperEvaluation.Processors/Ambev.DeveloperEvaluation.Processors.csproj",
+      "msbuildProject": "../Ambev.DeveloperEvaluation.Processors/Ambev.DeveloperEvaluation.Processors.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3298,8 +3298,14 @@
             "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\src\\Ambev.DeveloperEvaluation.Domain\\Ambev.DeveloperEvaluation.Domain.csproj": {
               "projectPath": "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\src\\Ambev.DeveloperEvaluation.Domain\\Ambev.DeveloperEvaluation.Domain.csproj"
             },
+            "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\src\\Ambev.DeveloperEvaluation.NoSQL\\Ambev.DeveloperEvaluation.NoSQL.csproj": {
+              "projectPath": "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\src\\Ambev.DeveloperEvaluation.NoSQL\\Ambev.DeveloperEvaluation.NoSQL.csproj"
+            },
             "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\src\\Ambev.DeveloperEvaluation.ORM\\Ambev.DeveloperEvaluation.ORM.csproj": {
               "projectPath": "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\src\\Ambev.DeveloperEvaluation.ORM\\Ambev.DeveloperEvaluation.ORM.csproj"
+            },
+            "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\src\\Ambev.DeveloperEvaluation.Processors\\Ambev.DeveloperEvaluation.Processors.csproj": {
+              "projectPath": "E:\\Projetos\\tests\\Tec2Cloud\\abi-gth-omnia-developer-evaluation (2)\\template\\backend\\src\\Ambev.DeveloperEvaluation.Processors\\Ambev.DeveloperEvaluation.Processors.csproj"
             }
           }
         }
