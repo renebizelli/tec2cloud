@@ -2,6 +2,9 @@
 
 public class CreateOrUpdateCartRequest
 {
+    public Guid BranchId { get; set; }
+    public Guid UserId { get; set; }
+
     public ICollection<CartItem> Items { get; set; } = [];
 
     public class CartItem
