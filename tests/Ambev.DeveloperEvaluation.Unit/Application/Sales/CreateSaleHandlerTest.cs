@@ -12,6 +12,8 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Rebus.Bus;
+using System.Security.AccessControl;
+using System.Threading;
 using Xunit;
 
 namespace Ambev.DeveloperEvaluation.Unit.Application.Sales;
@@ -57,6 +59,12 @@ public class CreateSaleHandlerTest
              }
         };
 
+        var product = new Product
+        {
+            Id = 1,
+            Price = 10
+        };
+
         var sale = new Sale
         {
             Id = 1,
@@ -98,11 +106,12 @@ public class CreateSaleHandlerTest
         };
 
         _mapper.Map<CartFilter>(command).Returns(cartFilter);
-        _mapper.Map<Sale>(cart).Returns(sale);
+        _mapper.Map<Sale>(cart, Arg.Any<Action<IMappingOperationOptions<object, Sale>>>()).Returns(sale);
         _mapper.Map<SaleResult>(sale).Returns(result);
 
         _cartRepository.GetCartByUser(Arg.Any<CartFilter>(), Arg.Any<CancellationToken>()).Returns(cart);
-       _saleRepository.GetAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(sale);
+        _saleRepository.GetAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(sale);
+        _productRepository.GetAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(product);
 
         var resultHandle = await _handler.Handle(command, CancellationToken.None);
 

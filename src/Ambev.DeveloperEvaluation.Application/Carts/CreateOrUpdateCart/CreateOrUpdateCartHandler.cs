@@ -25,6 +25,19 @@ public class CreateOrUpdateCartHandler : IRequestHandler<CreateOrUpdateCartComma
 
     public async Task Handle(CreateOrUpdateCartCommand command, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("[CreateOrUpdateCart] Start - UserId {UserId}, BranchId, {BranchId}", command.UserId, command.BranchId);
+
+        var items = new List<CreateOrUpdateCartCommand.CartItem>();
+
+        var itemsGroup = command.Items.GroupBy(g => g.ProductId, v => v);
+
+        foreach (var group in itemsGroup)
+        {
+            items.Add(new () { ProductId = group.Key, Quantity = group.Sum(s => s.Quantity) });
+        }
+
+        command.Items = items;
+
         var validator = new CreateOrUpdateCartCommandValidator();
         var validationResult = await validator.ValidateAsync(command, cancellationToken);
 
@@ -34,5 +47,7 @@ public class CreateOrUpdateCartHandler : IRequestHandler<CreateOrUpdateCartComma
         var cart = _mapper.Map<Cart>(command);
 
         await _repository.CreateOrUpdateCart(cart, cancellationToken);
+
+        _logger.LogInformation("[CreateOrUpdateCart] Finish - UserId {UserId}, BranchId, {BranchId}", command.UserId, command.BranchId);
     }
 }
