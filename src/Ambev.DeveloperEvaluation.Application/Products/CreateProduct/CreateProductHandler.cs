@@ -1,8 +1,8 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
-using MediatR;
 using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
@@ -22,6 +22,8 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Create
 
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("[CreateProduct] Start - Title {Title}", command.Title);
+
         var validator = new CreateProductCommandValidator();
         var validationResult = await validator.ValidateAsync(command, cancellationToken);
 
@@ -32,6 +34,9 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Create
 
         var createdProduct = await _productRepository.CreateAsync(product, cancellationToken);
         var result = _mapper.Map<CreateProductResult>(createdProduct);
+
+        _logger.LogInformation("[CreateProduct] Finish - Title {Title}", command.Title);
+
         return result;
     }
 }

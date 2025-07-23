@@ -25,6 +25,8 @@ public class DeleteCartHandler : IRequestHandler<DeleteCartCommand>
 
     public async Task Handle(DeleteCartCommand command, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("[DeleteCart] Start - UserId {UserId}, BranchId, {BranchId}", command.UserId, command.BranchId);
+
         var filter = _mapper.Map<CartFilter>(command);
 
         var validationResult = await filter.ValidateAsync(cancellationToken);
@@ -35,5 +37,7 @@ public class DeleteCartHandler : IRequestHandler<DeleteCartCommand>
         var sucess = await _repository.DeleteCart(filter, cancellationToken);
 
         if (!sucess) throw new KeyNotFoundException($"Cart not found with UserId {command.UserId} and branchId {command.BranchId}");
+
+        _logger.LogInformation("[DeleteCart] Finsh - UserId {UserId}, BranchId, {BranchId}", command.UserId, command.BranchId);
     }
 }

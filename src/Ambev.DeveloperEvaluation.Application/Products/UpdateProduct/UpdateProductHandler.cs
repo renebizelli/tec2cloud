@@ -21,6 +21,8 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Update
 
     public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("[UpdateProduct] Start - ProductId {Id}", command.Id);
+
         var validator = new UpdateProductCommandValidator();
         var validationResult = await validator.ValidateAsync(command, cancellationToken);
 
@@ -36,6 +38,8 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Update
         await _productRepository.UpdateAsync(foundProduct, cancellationToken);
 
         var result = _mapper.Map<UpdateProductResult>(foundProduct);
+
+        _logger.LogInformation("[UpdateProduct] Finish - ProductId {Id}", command.Id);
 
         return result;
     }

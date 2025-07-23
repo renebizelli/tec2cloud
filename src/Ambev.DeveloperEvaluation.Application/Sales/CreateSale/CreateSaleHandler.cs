@@ -43,6 +43,8 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
 
     public async Task<SaleResult> Handle(CreateSaleCommand command, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("[CreateSale] Start - UserId {UserId}, BranchId {BranchId}", command.UserId, command.BranchId);
+
         var filter = _mapper.Map<CartFilter>(command);
 
         var validationResult = await filter.ValidateAsync(cancellationToken);
@@ -67,6 +69,8 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
         sale = await _saleRepository.GetAsync(sale.Id, cancellationToken);
 
         var result = _mapper.Map<SaleResult>(sale);
+
+        _logger.LogInformation("[CreateSale] Finish - UserId {UserId}, BranchId {BranchId}", command.UserId, command.BranchId);
 
         return result;
     }

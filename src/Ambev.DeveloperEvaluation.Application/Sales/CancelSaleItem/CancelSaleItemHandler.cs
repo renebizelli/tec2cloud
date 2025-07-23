@@ -27,6 +27,8 @@ public class CancelSaleItemHandler : IRequestHandler<CancelSaleItemCommand, Canc
 
     public async Task<CancelSaleItemResult> Handle(CancelSaleItemCommand request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("[CancelSaleItem] Start - SaleId {SaleId}, SaleItemId {SaleItemId}", request.SaleId, request.SaleItemId);
+
         var validator = new CancelSaleItemCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
@@ -46,6 +48,8 @@ public class CancelSaleItemHandler : IRequestHandler<CancelSaleItemCommand, Canc
         await _saleRepository.UpdateAsync(sale, cancellationToken); 
 
         await _bus.Send(new SaleItemCancelledEvent(request.SaleId, request.SaleItemId));
+
+        _logger.LogInformation("[CancelSaleItem] Finish - SaleId {SaleId}, SaleItemId {SaleItemId}", request.SaleId, request.SaleItemId);
 
         return new CancelSaleItemResult { Success = true };
     }
