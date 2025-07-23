@@ -27,6 +27,17 @@ public class CreateOrUpdateCartHandler : IRequestHandler<CreateOrUpdateCartComma
     {
         _logger.LogInformation("[CreateOrUpdateCart] Start - UserId {UserId}, BranchId, {BranchId}", command.UserId, command.BranchId);
 
+        var items = new List<CreateOrUpdateCartCommand.CartItem>();
+
+        var itemsGroup = command.Items.GroupBy(g => g.ProductId, v => v);
+
+        foreach (var group in itemsGroup)
+        {
+            items.Add(new () { ProductId = group.Key, Quantity = group.Sum(s => s.Quantity) });
+        }
+
+        command.Items = items;
+
         var validator = new CreateOrUpdateCartCommandValidator();
         var validationResult = await validator.ValidateAsync(command, cancellationToken);
 
