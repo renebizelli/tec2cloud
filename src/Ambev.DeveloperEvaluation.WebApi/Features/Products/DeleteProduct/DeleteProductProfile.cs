@@ -8,5 +8,6 @@ public class DeleteProductProfile : Profile
     public DeleteProductProfile()
     {
         CreateMap<DeleteProductRequest, DeleteProductCommand>();
+        CreateMap<DeleteProductResult, DeleteProductResponse>();
     }
 }

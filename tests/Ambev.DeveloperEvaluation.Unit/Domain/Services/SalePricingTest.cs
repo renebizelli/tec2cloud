@@ -1,64 +1,105 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.Domain.Repositories;
-using Ambev.DeveloperEvaluation.Domain.Services.Sales.Pricing;
-using Ambev.DeveloperEvaluation.Unit.Application.Products.TestData;
-using Ambev.DeveloperEvaluation.Unit.Domain.Services.TestData;
-using NSubstitute;
-using NSubstitute.ReturnsExtensions;
-using System.Reflection.Metadata;
-using System.Threading;
+using Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
 using Xunit;
-using Xunit.Abstractions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Ambev.DeveloperEvaluation.Unit.Domain.Services;
 
 public class SalePricingTest
 {
     private readonly SalePricing _salePricing;
-    private readonly IProductRepository _productRepository;
 
     public SalePricingTest()
     {
-        _productRepository = Substitute.For<IProductRepository>();
-        _salePricing = new SalePricing(_productRepository);
+        _salePricing = new SalePricing();
     }
 
-    [Fact(DisplayName = "Given valid product data When apply pricing Then should not have error")]
-    public async Task Handle_ValidProduct_ShouldNotHaveError()
-    {
-        var product = SalePricingTestData.GenerateValidProduct();
 
-        var sale = new Sale();
-
-        var items = new List<SaleItem>
-            {
-                new SaleItem(0, product, 0, 10, 10, 0)
-            };
-
-        sale.SetItems(items);
-
-        _productRepository.GetAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).Returns(product);
-
-        await _salePricing.Pricing(sale);
-
-        Assert.Equal(product.Price, sale.Items.First().Price);
-    }
-
-    [Fact(DisplayName = "Given invalid product data When apply pricing Then should have error")]
-    public async Task Handle_InvalidProduct_ShouldHaveError()
+    [Fact(DisplayName = "Given valid sale allowed to discount When apply discounts")]
+    public void Handle_ValidProduct_ShouldNotHaveError()
     {
         var sale = new Sale();
 
-        var items = new List<SaleItem>
-            {
-                new SaleItem(0, new Product { Id = 0 }, 0, 10, 10, 0)
-            };
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 1, 10, 0, 0));
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 4, 10, 0, 0));
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 9, 10, 0, 0));
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 11, 10, 0, 0));
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 19, 10, 0, 0));
 
-        sale.SetItems(items);
+        _salePricing.Applier(sale);
 
-        _productRepository.GetAsync(Arg.Any<int>(), Arg.Any<CancellationToken>()).ReturnsNull();
+        var source = new List<(int quantity, decimal percent)>()
+        {
+            new (1, 0),
+            new (4, 0.1M),
+            new (9, 0.1M),
+            new (11, 0.2M),
+            new (19, 0.2M),
+        };
 
-        await Assert.ThrowsAsync<InvalidOperationException>(() => _salePricing.Pricing(sale));
+        foreach (var (quantity, percent) in source)
+        {
+            var item = sale.Items.Where(w => w.Quantity == quantity).First();
+            Assert.Equal(item.Price * percent, item.Discount);
+            Assert.Equal((item.Price * item.Quantity) - item.Discount, item.TotalPrice);
+        }
+
+        Assert.Equal(434, sale.TotalAmount);
+    }
+
+
+    [Fact(DisplayName = "Given a sale with less items then allowed to have discount then no apply discount")]
+    public void Handle_Less_Items_Allowed_Discount_No_Apply_Discount()
+    {
+        var sale = new Sale();
+        
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 10, 10, 0, 0));
+
+        for (int i = 0; i < 5; i++)
+        {
+            var item = new SaleItem(0, new Product { Id = 1 }, 10, 10, 0, 0);
+            item.Cancel();
+
+            sale.AddItem(item);
+        }
+
+        _salePricing.Applier(sale);
+
+        foreach (var item in sale.Items)
+        {
+            Assert.Equal(0, item.Discount);
+            Assert.Equal(item.Price * item.Quantity, item.TotalPrice);
+        }
+
+        Assert.Equal(100, sale.TotalAmount);
+    }
+
+
+    [Fact(DisplayName = "Given a sale with some cancelled items then pricing must ignore them")]
+    public void Handle_Some_Cancelled_Items_Igonre_Them()
+    {
+        var sale = new Sale();
+
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 10, 10, 0, 0));
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 10, 10, 0, 0));
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 10, 10, 0, 0));
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 10, 10, 0, 0));
+        sale.AddItem(new SaleItem(0, new Product { Id = 1 }, 10, 10, 0, 0));
+
+        for (int i = 0; i < 5; i++)
+        {
+            var item = new SaleItem(0, new Product { Id = 1 }, 10, 10, 0, 0);
+            item.Cancel();
+
+            sale.AddItem(item);
+        }
+
+        _salePricing.Applier(sale);
+
+        foreach (var item in sale.Items)
+        {
+            Assert.Equal((item.Price * item.Quantity) - item.Discount, item.TotalPrice);
+        }
+
+        Assert.Equal(490, sale.TotalAmount);
     }
 }

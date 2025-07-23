@@ -9,6 +9,5 @@ public class SaleItemResponse
     public int Quantity { get; set; }
     public decimal Price { get; set; }
     public decimal Discount { get; set; }
-    public SaleItemStatus Status { get; set; }
     public decimal TotalPrice { get { return Price * Quantity - Discount; } }
 }

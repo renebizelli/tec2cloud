@@ -9,5 +9,4 @@ public class SaleResponse
     public UserResponse User { get; set; } = new();
     public decimal TotalAmount { get; set; }
     public DateTime CreatedAt { get; set; }
-    public ICollection<SaleItemResponse> Items { get; set; } = [];
 }

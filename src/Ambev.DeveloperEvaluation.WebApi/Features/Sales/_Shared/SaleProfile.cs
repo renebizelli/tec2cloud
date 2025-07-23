@@ -8,6 +8,9 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales._Shared
     {
         public SaleProfile()
         {
+            CreateMap<SaleResult, SaleDetailResponse>()
+                .IncludeBase<SaleResult, SaleResponse>();
+
             CreateMap<SaleResult, SaleResponse>()
                 .ForMember(f => f.Branch, o => o.MapFrom(m => m.Branch));
 

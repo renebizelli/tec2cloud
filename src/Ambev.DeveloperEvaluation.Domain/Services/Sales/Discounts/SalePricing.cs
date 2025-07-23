@@ -3,16 +3,17 @@ using Ambev.DeveloperEvaluation.Domain.Specifications;
 
 namespace Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
 
-public class SaleDiscountApplier : ISaleDiscountApplier
+public class SalePricing : ISalePricing
 {
-    public void Applier(Sale sale, CancellationToken cancellationToken = default)
+    public void Applier(Sale sale)
     {
-        if (!AllowedDiscount(sale)) return;
-
-        foreach (var item in sale.ActiveItems())
+        if (AllowedDiscount(sale))
         {
-            var discount = DiscountFactory.Get(item.Quantity);
-            discount.Apply(item);
+            foreach (var item in sale.ActiveItems())
+            {
+                var discount = DiscountFactory.Get(item.Quantity);
+                discount.Apply(item);
+            }
         }
 
         sale.TotalAmountCalculate();

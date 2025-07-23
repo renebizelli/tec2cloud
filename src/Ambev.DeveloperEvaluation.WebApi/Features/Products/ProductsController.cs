@@ -79,10 +79,8 @@ public class ProductsController : BaseController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteProduct([FromRoute] int id, CancellationToken cancellationToken)
+    public async Task<IActionResult> DeleteProduct([FromRoute] DeleteProductRequest request, CancellationToken cancellationToken)
     {
-        var request = new DeleteProductRequest {  Id = id };
-
         var validator = new DeleteProductRequestValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
@@ -91,9 +89,11 @@ public class ProductsController : BaseController
 
         var command = _mapper.Map<DeleteProductCommand>(request);
 
-        await _mediator.Send(command, cancellationToken);
+        var result = await _mediator.Send(command, cancellationToken);
 
-        return NoContent();
+        var response = _mapper.Map<DeleteProductResponse>(result);
+
+        return Ok(response);
     }
 
     [HttpGet()]

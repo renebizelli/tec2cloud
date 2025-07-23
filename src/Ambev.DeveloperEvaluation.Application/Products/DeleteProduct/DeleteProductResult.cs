@@ -1,7 +1,7 @@
 namespace Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
 
 
-public class DeleteProductResponse
+public class DeleteProductResult
 {
     public bool Success { get; set; }
 }

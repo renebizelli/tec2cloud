@@ -3,6 +3,7 @@ using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Interfaces;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.ORM.Extensions;
+using Humanizer;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -17,10 +18,18 @@ public class SaleRepository : ISaleRepository
         _context = context;
     }
 
+    public async Task<Sale?> GetAttachedAsync(int saleId, CancellationToken cancellationToken = default)
+    {
+        return await _context.Sales
+            .Include(i => i.Items)
+            .Where(w => w.Id.Equals(saleId))
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
     public async Task<Sale?> GetAsync(int saleId, CancellationToken cancellationToken = default)
     {
         return await _context.Sales
-            .Include(i => i.Items.Where(w => w.Status == SaleItemStatus.Active))
+            .Include(i => i.Items.Where(w => w.Status == SaleItemStatus.Active && w.Product != null).OrderBy(o => o.Product!.Title))
                 .ThenInclude(i => i.Product)
             .Include(i => i.User)
             .Include(i => i.Branch)
@@ -63,5 +72,25 @@ public class SaleRepository : ISaleRepository
                         .ToListAsync(cancellationToken);
 
         return (count, products);
+    }
+
+    public async Task<bool> DeleteAsync(int saleId, CancellationToken cancellationToken = default)
+    {
+        var sale = await _context.Sales.FirstOrDefaultAsync(f => f.Id.Equals(saleId) && f.Status == SaleStatus.Active, cancellationToken);
+
+        if (sale == null)
+            return false;
+
+        sale.Cancel();
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return true;
+    }
+
+    public async Task UpdateAsync(Sale sale, CancellationToken cancellationToken)
+    {
+        //_context.Entry(sale).State = EntityState.Modified;
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

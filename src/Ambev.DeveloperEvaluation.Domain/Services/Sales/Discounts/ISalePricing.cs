@@ -2,7 +2,7 @@
 
 namespace Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
 
-public interface ISaleDiscountApplier
+public interface ISalePricing
 {
-    void Applier(Sale sale, CancellationToken cancellationToken = default);
+    void Applier(Sale sale);
 }

@@ -15,7 +15,7 @@ public class SaleConfiguration : IEntityTypeConfiguration<Sale>
 
         builder.Property(u => u.BranchId).IsRequired();
         builder.Property(u => u.Status).IsRequired();
-        builder.Property(u => u.TotalAmount).IsRequired();
+        builder.Property(u => u.TotalAmount).HasField("_totalAmount").IsRequired();
         builder.Property(u => u.CreatedAt).IsRequired();
         builder.Property(u => u.Status).IsRequired();
 

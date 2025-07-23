@@ -1,5 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Carts.CreateOrUpdateCart;
-using Ambev.DeveloperEvaluation.Application.Sales._Shared.Results;
+﻿using Ambev.DeveloperEvaluation.Application.Sales._Shared.Results;
 using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Entities;
@@ -7,14 +6,12 @@ using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Events;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
-using Ambev.DeveloperEvaluation.Domain.Services.Sales.Pricing;
 using Ambev.DeveloperEvaluation.Unit.Application.Sales.TestData;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Rebus.Bus;
-using System.Threading;
 using Xunit;
 
 namespace Ambev.DeveloperEvaluation.Unit.Application.Sales;
@@ -23,8 +20,8 @@ public class CreateSaleHandlerTest
 {
     private readonly ISaleRepository _saleRepository;
     private readonly ICartRepository _cartRepository;
-    private readonly ISalePricing _salePricing;
-    private readonly ISaleDiscountApplier _discountApplier;
+    private readonly ISalePricing _discountApplier;
+    private readonly IProductRepository _productRepository;
     private readonly IBus _bus;
     private readonly IMapper _mapper;
     private readonly ILogger<CreateSaleHandler> _logger;
@@ -34,12 +31,12 @@ public class CreateSaleHandlerTest
     {
         _saleRepository = Substitute.For<ISaleRepository>();
         _cartRepository = Substitute.For<ICartRepository>();
-        _salePricing = Substitute.For<ISalePricing>();
-        _discountApplier = Substitute.For<ISaleDiscountApplier>();
+        _discountApplier = Substitute.For<ISalePricing>();
+        _productRepository = Substitute.For<IProductRepository>();
         _bus = Substitute.For<IBus>();
         _mapper = Substitute.For<IMapper>();
         _logger = Substitute.For<ILogger<CreateSaleHandler>>();
-        _handler = new CreateSaleHandler(_saleRepository, _cartRepository, _salePricing, _discountApplier, _bus, _mapper, _logger);
+        _handler = new CreateSaleHandler(_saleRepository, _cartRepository, _discountApplier, _productRepository, _bus, _mapper, _logger);
     }
 
     [Fact(DisplayName = "Given valid cart filter data When creating sale Then returns success response")]
@@ -70,7 +67,11 @@ public class CreateSaleHandlerTest
         };
 
         var items = cart.Items.Select(s => new SaleItem(0, new Product { Id = s.ProductId }, s.Quantity, 0, 0, 1)).ToList();
-        sale.SetItems(items);
+
+        foreach (var item in items)
+        {
+            sale.AddItem(item);
+        }
 
         var cartFilter = new CartFilter
         {
@@ -105,8 +106,8 @@ public class CreateSaleHandlerTest
 
         var resultHandle = await _handler.Handle(command, CancellationToken.None);
 
-        await _salePricing.Received(1).Pricing(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
-        _discountApplier.Received(1).Applier(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
+        await _productRepository.Received().GetAsync(Arg.Any<int>(), Arg.Any<CancellationToken>());
+        _discountApplier.Received(1).Applier(Arg.Any<Sale>());
         await _saleRepository.Received(1).CreateSaleAsync(Arg.Any<Sale>(), Arg.Any<CancellationToken>());
         await _cartRepository.Received(1).DeleteCart(Arg.Any<CartFilter>(), Arg.Any<CancellationToken>());
         await _bus.Received(1).Send(Arg.Any<SaleCreatedEvent>());

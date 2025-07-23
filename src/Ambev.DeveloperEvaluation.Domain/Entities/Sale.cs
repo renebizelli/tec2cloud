@@ -10,17 +10,27 @@ public class Sale
     public SaleStatus Status { get; set; } 
     public Guid UserId { get; set; }
     public User? User { get; set; }
-    public decimal TotalAmount { get; private set; }
+    public decimal TotalAmount => _totalAmount;
+    private decimal _totalAmount;
     public DateTime CreatedAt { get; set; }
-    public ICollection<SaleItem> Items { get; private set; } = [];
+    
+    private readonly List<SaleItem> _items = new();
+    public IReadOnlyCollection<SaleItem> Items => _items.AsReadOnly();
 
     public void TotalAmountCalculate()
     {
-        TotalAmount = ActiveItems().Sum(s => s.TotalPrice);
+        _totalAmount = ActiveItems().Sum(s => s.TotalPrice);
     }
 
-    public void SetItems(ICollection<SaleItem> items) {
-        Items = items;
+    public void AddItem(SaleItem item) {
+        _items.Add(item);
+
+        TotalAmountCalculate();
+    }
+
+    public void Cancel()
+    {
+        Status = SaleStatus.Cancelled;
     }
 
     public ICollection<SaleItem> ActiveItems()
