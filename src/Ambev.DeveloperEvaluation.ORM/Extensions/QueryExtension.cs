@@ -87,6 +87,40 @@ public static class QueryExtension
         return query.Where(lambda);
     }
 
+    public static IQueryable<T> ApplyWhereRange<T>(this IQueryable<T> query, DateTime minValue, DateTime maxValue, Expression<Func<T, DateTime>> selector)
+    {
+        var param = selector.Parameters[0];
+        Expression body = null!;
+
+        if (!minValue.Equals(DateTime.MinValue))
+        {
+            var minValueUTC = DateTime.SpecifyKind(minValue.Date, DateTimeKind.Local).ToUniversalTime();
+
+            var minConstant = Expression.Constant(minValueUTC, typeof(DateTime));
+            var greaterOrEqual = Expression.GreaterThanOrEqual(selector.Body, minConstant);
+            body = greaterOrEqual;
+        }
+
+        if (!maxValue.Equals(DateTime.MinValue))
+        {
+            var maxValueUTC = DateTime.SpecifyKind(maxValue.Date, DateTimeKind.Local).ToUniversalTime();
+            var maxUTC = maxValueUTC.AddDays(1).AddSeconds(-1);
+
+            var maxConstant = Expression.Constant(maxUTC, typeof(DateTime));
+            var lessOrEqual = Expression.LessThanOrEqual(selector.Body, maxConstant);
+
+            body = body == null ? lessOrEqual : Expression.AndAlso(body, lessOrEqual);
+        }
+
+        if (body == null) return query;
+
+        var lambda = Expression.Lambda<Func<T, bool>>(body, param);
+
+        return query.Where(lambda);
+    }
+
+
+
     public static IQueryable<T> ApplyPaging<T>(this IQueryable<T> query, int page, int pageSize)
     {
         return query.Skip((page - 1) * pageSize).Take(pageSize);

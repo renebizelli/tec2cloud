@@ -4,7 +4,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
 
 public class DefaultDiscount : IDiscount
 {
-    public void Calculate(SaleItem item)
+    public void Apply(SaleItem item)
     {
     }
 }

@@ -4,7 +4,6 @@ using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Events;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Ambev.DeveloperEvaluation.Domain.Services.Sales.Discounts;
-using Ambev.DeveloperEvaluation.Domain.Services.Sales.Pricing;
 using Ambev.DeveloperEvaluation.Domain.Specifications;
 using AutoMapper;
 using FluentValidation;
@@ -19,7 +18,7 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
     private readonly ISaleRepository _saleRepository;
     private readonly ICartRepository _cartRepository;
     private readonly ISalePricing _salePricing;
-    private readonly ISaleDiscountApplier _discountApplier;
+    private readonly IProductRepository _productRepository;
     private readonly IBus _bus;
     private readonly IMapper _mapper;
     private readonly ILogger<CreateSaleHandler> _logger;
@@ -28,7 +27,7 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
         ISaleRepository saleRepository,
         ICartRepository cartRepository,
         ISalePricing salePricing,
-        ISaleDiscountApplier discountApplier,
+        IProductRepository productRepository,
         Rebus.Bus.IBus bus,
         IMapper mapper,
         ILogger<CreateSaleHandler> logger)
@@ -36,7 +35,7 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
         _saleRepository = saleRepository;
         _cartRepository = cartRepository;
         _salePricing = salePricing;
-        _discountApplier = discountApplier;
+        _productRepository = productRepository;
         _bus = bus;
         _mapper = mapper;
         _logger = logger;
@@ -51,36 +50,55 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var cart = await GetCart(filter, cancellationToken);
-
-        var sale = _mapper.Map<Sale>(cart);
+        var sale = await SaleMappingAsync(filter, cancellationToken);
 
         SaleItemAllowedQuantityValidation(sale);
 
-        await _salePricing.Pricing(sale);
+        CompletedSaleValidation(sale);
 
-        _discountApplier.Applier(sale);
+        _salePricing.Applier(sale);
 
-        await _saleRepository.CreateSale(sale, cancellationToken);
+        await _saleRepository.CreateSaleAsync(sale, cancellationToken);
 
         await _cartRepository.DeleteCart(filter, cancellationToken);
 
-        await _bus.Send(new SaleCreatedEvent { SaleId = sale.Id });
+        await _bus.Send(new SaleCreatedEvent(sale.Id));
 
-        sale = await _saleRepository.Get(sale.Id, cancellationToken);
+        sale = await _saleRepository.GetAsync(sale.Id, cancellationToken);
 
         var result = _mapper.Map<SaleResult>(sale);
 
         return result;
     }
 
-    private async Task<Cart> GetCart(CartFilter filter, CancellationToken cancellationToken)
+    private async Task<Sale> SaleMappingAsync(CartFilter filter, CancellationToken cancellationToken)
+    {
+        var cart = await GetCartAsync(filter, cancellationToken);
+
+        Dictionary<string, object> prices = new();
+        foreach (var item in cart.Items)
+        {
+            var product = await _productRepository.GetAsync(item.ProductId, cancellationToken);
+            if (product == null) throw new InvalidOperationException($"Invalid product id {item.ProductId}");
+            prices[item.ProductId.ToString()] = product.Price;
+        }
+
+        var sale = _mapper.Map<Sale>(cart, o =>
+        {
+            foreach (var price in prices)
+            {
+                o.Items[price.Key] = price.Value;
+            }
+        });
+
+        return sale;
+    }
+
+    private async Task<Cart> GetCartAsync(CartFilter filter, CancellationToken cancellationToken)
     {
         var cart = await _cartRepository.GetCartByUser(filter, cancellationToken);
 
-        if (cart == null) throw new InvalidOperationException($"Empty cart");
-
-        return cart;
+        return cart ?? throw new InvalidOperationException($"Empty cart");
     }
 
     private void SaleItemAllowedQuantityValidation(Sale sale)
@@ -93,5 +111,11 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, SaleResult>
                 throw new DomainException("Invalid quantity of item");
             }
         }
+    }
+
+    private void CompletedSaleValidation(Sale sale)
+    {
+        var spec = new CompletedSaleSpecification();
+        if (!spec.IsSatisfiedBy(sale)) throw new DomainException("There is no items");
     }
 }

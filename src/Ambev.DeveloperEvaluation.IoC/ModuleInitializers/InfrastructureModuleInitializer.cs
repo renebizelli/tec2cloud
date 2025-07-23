@@ -7,8 +7,6 @@ using Ambev.DeveloperEvaluation.Processors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Rebus.Bus;
-using Rebus.ServiceProvider;
 
 namespace Ambev.DeveloperEvaluation.IoC.ModuleInitializers;
 
@@ -25,6 +23,7 @@ public class InfrastructureModuleInitializer : IModuleInitializer
         builder.Services.AddTransient<IProductRepository, ProductRepository>();
         builder.Services.AddTransient<ICartRepository, CartRepository>();
         builder.Services.AddTransient<ISaleRepository, SaleRepository>();
+        builder.Services.AddTransient<ISaleItemRepository, SaleItemRepository>();
 
         builder.Services.AddProcessors();
     }

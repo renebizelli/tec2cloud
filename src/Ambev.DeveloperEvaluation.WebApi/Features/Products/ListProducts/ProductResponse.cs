@@ -1,11 +1,5 @@
 ﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Products.ListProducts;
 
-public class ProductsResponse
-{
-    public int TotalCount { get; set; }
-    public List<ProductResponse> Products { get; set; } = [];
-}
-
 public class ProductResponse
 {
     public int Id { get; set; }
